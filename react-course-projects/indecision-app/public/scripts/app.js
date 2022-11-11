@@ -1,38 +1,49 @@
 "use strict";
 
-console.log("App.js is running");
+//arguments object - no longer bound with arrow functions
 
-//JSX - JavaScript XML
-// var template = (
-//     <div>
-//         <h1>Indecision App</h1>
-//         <p>This is some info</p>
-//         <ol>
-//             <li>Item One</li>
-//             <li>Item Two</li>
-//         </ol>
-//     </div>
-// );
+// const add = function (a, b) { es5
+//     console.log(arguments);
+//     return a + b;
+// }
 
-var template2 = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        "Tyler Nelson"
-    ),
-    React.createElement(
-        "p",
-        null,
-        "Age: 1"
-    ),
-    React.createElement(
-        "p",
-        null,
-        "Location: Canada"
-    )
-);
-var appRoot = document.getElementById("app");
+// const add = (a, b) => { es6
+//     console.log(arguments);
+//     return a + b;
+// }
 
-ReactDOM.render(template2, appRoot);
+var add = function add(a, b) {
+  return a + b;
+};
+
+console.log(add(2, 3));
+
+var user = {
+  name: "Bob",
+  cities: ["New York", "Montreal", "Vermont"],
+  printPlacesLived: function printPlacesLived() {
+    var _this = this;
+
+    return this.cities.map(function (city) {
+      return _this.name + " has lived in " + city;
+    });
+  }
+};
+
+console.log(user.printPlacesLived());
+
+//chalelnge
+
+var multiplier = {
+  numbers: [2, 4, 6, 8, 10],
+  multiplyBy: 10,
+  multiply: function multiply() {
+    var _this2 = this;
+
+    return this.numbers.map(function (number) {
+      return number * _this2.multiplyBy;
+    });
+  }
+};
+
+console.log(multiplier.multiply());
