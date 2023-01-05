@@ -4,6 +4,11 @@ const accountsReducerDefaultState = [];
 
 export default (state = accountsReducerDefaultState, action) => {
     switch (action.type) {
+        case 'GET_ALL_ACCOUNTS':
+            return {
+                ...state,
+                account:action.payload
+            }
         case 'ADD_ACCOUNT':
             return [...state, action.account];
         case 'REMOVE_ACCOUNT':

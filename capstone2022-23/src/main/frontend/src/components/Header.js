@@ -1,17 +1,27 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
-import { Navbar } from 'reactstrap';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem } from "reactstrap";
 
 const Header = () => (
-    <header>
+  <header>
     <Navbar color="dark" dark expand="md">
-        <NavLink to="/" activeClassName='is-active' exact={true}>Home</NavLink>
-        <NavLink to="/create" activeClassName='is-active'>Shop</NavLink>
-        <NavLink to="/myitems" activeClassName='is-active'>My Items</NavLink>
-        <NavLink to="/myaccount" activeClassName='is-active'>My Account</NavLink>
-        <NavLink to="/logout" activeClassName='is-active'>Logout</NavLink>
-        </Navbar>
-    </header>
+      <NavbarBrand tag={NavLink} to="/" exact={true}>
+        Home
+      </NavbarBrand>
+      <NavbarBrand tag={NavLink} to="/create">
+        Shop
+      </NavbarBrand>
+      <NavbarBrand tag={NavLink} to="/myitems">
+        My Items
+      </NavbarBrand>
+      <NavbarBrand tag={NavLink} to="/myaccount">
+        My Account
+      </NavbarBrand>
+      <NavbarBrand tag={NavLink} to="/logout">
+        Logout
+      </NavbarBrand>
+    </Navbar>
+  </header>
 );
 
 export default Header;
