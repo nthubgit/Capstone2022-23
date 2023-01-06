@@ -9,10 +9,6 @@ import 'react-dates/lib/css/_datepicker.css'
 
 const store = configureStore();
 
-// store.dispatch(addExpense({}));
-// store.dispatch(addExpense({}));
-// store.dispatch(addExpense({}));
-
 const state = store.getState();
 
 const jsx = (

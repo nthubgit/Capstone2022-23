@@ -1,30 +1,20 @@
-//Accounts Reducer
+import {
+    CREATE_ACCOUNT,
+    RETRIEVE_ACCOUNTS,
+    UPDATE_ACCOUNT,
+    DELETE_ACCOUNT,
+    DELETE_ALL_ACCOUNTS
+  } from "../actions/types";
 
 const accountsReducerDefaultState = [];
 
 export default (state = accountsReducerDefaultState, action) => {
-    switch (action.type) {
-        case 'GET_ALL_ACCOUNTS':
-            return {
-                ...state,
-                account:action.payload
-            }
-        case 'ADD_ACCOUNT':
-            return [...state, action.account];
-        case 'REMOVE_ACCOUNT':
-            return state.filter(({ id }) => id !== action.id); //tbd learn more about filter
-        case 'EDIT_ACCOUNT':
-            return state.map((account) => {
-                if (account.id === action.id){
-                    return {
-                        ...account,
-                        ...action.updates
-                    }
-                }
-                else {
-                    return account;
-                }
-            })
+
+    const { type, payload } = action;
+    
+    switch (type) {
+        case RETRIEVE_ACCOUNTS:
+            return payload;
         default:
             return state;
     }
