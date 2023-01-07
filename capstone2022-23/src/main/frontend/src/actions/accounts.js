@@ -20,3 +20,18 @@ import {
       console.log(err);
     }
   };
+
+  export const createAccount = (firstName, lastName, dob, email) => async (dispatch) => {
+    try {
+      const res = await accountService.create({ firstName, lastName, dob, email });
+  
+      dispatch({
+        type: CREATE_ACCOUNT,
+        payload: res.data,
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };

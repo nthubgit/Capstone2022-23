@@ -17,6 +17,9 @@ const Header = () => (
       <NavbarBrand tag={NavLink} to="/myaccount">
         My Account
       </NavbarBrand>
+      <NavbarBrand tag={NavLink} to="/register">
+      Register
+    </NavbarBrand>
       <NavbarBrand tag={NavLink} to="/logout">
         Logout
       </NavbarBrand>

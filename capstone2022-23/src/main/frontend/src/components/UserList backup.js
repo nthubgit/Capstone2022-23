@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { styled } from '@mui/material/styles';
-import { RETRIEVE_ACCOUNTS } from "../actions/types";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -49,7 +48,6 @@ const rows = [
 ];
 
 export const UserList = (props) => {
-
   return <div>
   <TableContainer component={Paper}>
   <Table sx={{ minWidth: 700 }} aria-label="customized table">

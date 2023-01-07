@@ -15,6 +15,10 @@ export default (state = accountsReducerDefaultState, action) => {
     switch (type) {
         case RETRIEVE_ACCOUNTS:
             return payload;
+        case CREATE_ACCOUNT:
+            return [...state, payload];
+        case DELETE_ACCOUNT:
+            return state.filter(({ id }) => id !== payload.id)
         default:
             return state;
     }
