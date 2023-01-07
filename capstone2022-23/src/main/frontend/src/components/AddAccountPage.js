@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import 'regenerator-runtime/runtime';
 import { createAccount } from "../actions/accounts";
 
 class AddAccountPage extends Component {
