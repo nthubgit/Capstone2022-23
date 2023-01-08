@@ -21,6 +21,8 @@ class AddAccountPage extends Component {
         lastName: '',
         dob: '',
         email: '',
+
+        submitted: false,
   }
 }
 
@@ -46,10 +48,10 @@ class AddAccountPage extends Component {
   }
 
   saveAccount() {
-    const { title, description } = this.state;
+    const { firstName, lastName, dob, email } = this.state;
 
     this.props
-      .createAccount(title, description)
+      .createAccount(firstName, lastName, dob, email)
       .then((data) => {
         this.setState({
           firstName: data.firstName,
@@ -58,9 +60,17 @@ class AddAccountPage extends Component {
           email: data.email
         });
         console.log(data);
+        console.log(data.response);
+        // if (e.response.status = 200) {
+        //   this.setState({
+        //     submitted: true
+        //   })
+        // }
       })
       .catch((e) => {
-        console.log(e);
+        console.log({e});
+        console.log(e.response);
+        console.log(e.response.status)
       });
   }
 
@@ -71,6 +81,8 @@ class AddAccountPage extends Component {
       lastName: '',
       dob: '',
       email: '',  
+
+      submitted: false,
     });
   }
 
