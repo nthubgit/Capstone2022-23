@@ -6,6 +6,7 @@ import DashboardPage from '../components/DashboardPage';
 import MyItemsPage from '../components/MyItemsPage';
 import MyAccountPage from '../components/MyAccountPage';
 import LoginPage from '../components/LoginPage';
+import SignIn from '../components/Signin';
 import RegisterPage from '../components/RegisterPage';
 import NotFoundPage from '../components/NotFoundPage';
 

@@ -1,5 +1,19 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
+
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -7,6 +21,8 @@ import CheckButton from "react-validation/build/button";
 
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
+
+const theme = createTheme();
 
 const required = (value) => {
   if (!value) {
@@ -63,7 +79,7 @@ class LoginPage extends Component {
         })
         .catch(() => {
           this.setState({
-            loading: false
+            loading: false,
           });
         });
     } else {
@@ -81,72 +97,91 @@ class LoginPage extends Component {
     }
 
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
-
-          <Form
-            onSubmit={this.handleLogin}
-            ref={(c) => {
-              this.form = c;
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              <b>Login</b>
+            </Typography>
+
+            <Form
+              onSubmit={this.handleLogin}
+              ref={(c) => {
+                this.form = c;
+              }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
                 name="username"
+                autoComplete="username"
+                autoFocus
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
               />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="password"
+                label="Password"
                 name="password"
+                autoComplete="password"
+                autoFocus
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}
               />
-            </div>
 
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {message && (
               <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {message}
-                </div>
+                <button
+                  className="btn btn-primary btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Login</span>
+                </button>
+                <Grid item>
+                <Link href="/register" variant="body2">
+                  {"Click here to register a new account."}
+                </Link>
+              </Grid>
               </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={(c) => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-        </div>
-      </div>
+
+              {message && (
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={(c) => {
+                  this.checkBtn = c;
+                }}
+              />
+            </Form>
+          </Box>
+        </Container>
+      </ThemeProvider>
     );
   }
 }
@@ -156,7 +191,7 @@ function mapStateToProps(state) {
   const { message } = state.message;
   return {
     isLoggedIn,
-    message
+    message,
   };
 }
 

@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem } from "reactstrap";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import { Redirect } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 class Header extends Component {
 
@@ -10,32 +12,47 @@ class Header extends Component {
     this.props.dispatch(logout());
   }
 
-  render () {
+  render() {
+    //Checks to see if user is logged in, otherwise they are redirected to Login and the navbar doesn't load.
+    //Works because the Header component is on every page, but not entirely sure if it's actually secure.
+
+    const { user: currentUser } = this.props;
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
+
+    const logOutButtonStyle = {
+      cursor: 'pointer',
+      fontSize: 18
+    }
+
     return (
-    <header>
-    <Navbar color="dark" dark expand="md">
-      <NavbarBrand tag={NavLink} to="/" exact={true}>
-        Home
-      </NavbarBrand>
-      <NavbarBrand tag={NavLink} to="/create">
-        Shop
-      </NavbarBrand>
-      <NavbarBrand tag={NavLink} to="/myitems">
-        My Items
-      </NavbarBrand>
-      <NavbarBrand tag={NavLink} to="/myaccount">
-        My Account
-      </NavbarBrand>
-      <NavbarBrand tag={NavLink} to="/register">
-      Register
-    </NavbarBrand>
-      <NavbarBrand tag={NavLink} to="/login" onClick={this.logOut}>
-        Logout
-      </NavbarBrand>
-    </Navbar>
-  </header>
-    )
+      <header>
+        <Navbar color="dark" dark expand="md">
+          <NavbarBrand tag={NavLink} to="/" exact={true}>
+            Home
+          </NavbarBrand>
+          <NavbarBrand tag={NavLink} to="/create">
+            Shop
+          </NavbarBrand>
+          <NavbarBrand tag={NavLink} to="/myitems">
+            My Items
+          </NavbarBrand>
+          <NavbarBrand tag={NavLink} to="/myaccount">
+            My Account
+          </NavbarBrand> 
+          <LogoutIcon htmlColor="red" style={logOutButtonStyle}  onClick={() => this.logOut()}/>
+        </Navbar>
+      </header>
+    );
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  const { user } = state.auth;
+  return {
+    user,
+  };
+}
+
+export default connect(mapStateToProps)(Header);
