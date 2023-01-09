@@ -6,11 +6,10 @@ import DashboardPage from '../components/DashboardPage';
 import MyItemsPage from '../components/MyItemsPage';
 import MyAccountPage from '../components/MyAccountPage';
 import LoginPage from '../components/LoginPage';
-import SignIn from '../components/Signin';
 import RegisterPage from '../components/RegisterPage';
 import NotFoundPage from '../components/NotFoundPage';
+import ShopPage from '../components/ShopPageTest';
 
- // find out how to have the dashboard be default unless logged out
 const AppRouter = () => (
     <BrowserRouter>
     <div>
@@ -21,6 +20,7 @@ const AppRouter = () => (
         <Route path="/myaccount" component={MyAccountPage}/>
         <Route path="/register" component={RegisterPage}/>
         <Route path="/login" component={LoginPage}/>
+        <Route path="/shop" component={ShopPage}/>
         <Route component={NotFoundPage}/>
         </Switch>
     </div>

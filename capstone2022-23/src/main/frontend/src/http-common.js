@@ -6,3 +6,10 @@ export default axios.create({
     "Content-type": "application/json"
   }
 });
+
+export const dummyjson = axios.create({
+  baseURL: "https://dummyjson.com/products",
+  headers: {
+    "Content-type": "application/json"
+  }
+});

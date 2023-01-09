@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { retrieveProducts } from "../actions/products";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,6 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
 
 function createData(
   name: string,
@@ -82,7 +84,7 @@ export const UserList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        
+
       };
 };
 

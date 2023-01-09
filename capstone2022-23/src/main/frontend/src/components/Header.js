@@ -26,13 +26,14 @@ class Header extends Component {
       fontSize: 18
     }
 
+    //Can't use onClick with NavbarBrand component, so using an icon instead. Consider revamping the navbar later.
     return (
       <header>
         <Navbar color="dark" dark expand="md">
           <NavbarBrand tag={NavLink} to="/" exact={true}>
             Home
           </NavbarBrand>
-          <NavbarBrand tag={NavLink} to="/create">
+          <NavbarBrand tag={NavLink} to="/shop">
             Shop
           </NavbarBrand>
           <NavbarBrand tag={NavLink} to="/myitems">
