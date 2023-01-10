@@ -2,7 +2,7 @@ import { dummyjson } from "../http-common";
 
 class ProductsService {
   getAll() {
-    return http.get("/products");
+    return dummyjson.get("/products");
   }
 }
 

@@ -2,7 +2,9 @@ import {
     GET_ALL_PRODUCTS
   } from "../actions/types";
 
-const productsReducerDefaultState = [];
+const productsReducerDefaultState = {
+    products : []
+};
 
 export default (state = productsReducerDefaultState, action) => {
 

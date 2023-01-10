@@ -18,23 +18,32 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
+import { retrieveProducts } from "../actions/products";
 
 class ShopPage extends Component {
-  state = {
-    cards: [],
-  };
+
+  fetchProducts = async () => {
+    const response = await axios
+    .get("https://dummyjson.com/products")
+    .catch((err) => {
+        dispatch( {
+            type: ActionTypes.PRODUCTS_ERROR,
+            payload: err,
+        })
+        console.log("Err", err);
+    });
+    this.props.dispatch(retrieveProducts(response.data));
+};
+
 
   componentDidMount() {
-    axios.get(`https://dummyjson.com/products`).then((res) => {
-      const cards = res.data.products;
-      this.setState({ cards });
-      console.log(cards);
-    });
+    this.fetchProducts();
   }
 
   render() {
+    const { products } = this.props;
     const theme = createTheme();
-    console.log(this.state.cards);
+    console.log(products);
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -89,7 +98,7 @@ class ShopPage extends Component {
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={2}>
-              {this.state.cards.map((card) => {
+              {products.map((card) => {
                 return <ShopListItem key={card.id} {...card} />;
               })}
             </Grid>
@@ -101,9 +110,9 @@ class ShopPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { message } = state.message;
+  const { products } = state.products;
   return {
-    message,
+    products
   };
 }
 
