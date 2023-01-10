@@ -8,7 +8,7 @@ import MyAccountPage from '../components/MyAccountPage';
 import LoginPage from '../components/LoginPage';
 import RegisterPage from '../components/RegisterPage';
 import NotFoundPage from '../components/NotFoundPage';
-import ShopPage from '../components/ShopPageTest';
+import ShopPage from '../components/ShopPage';
 
 const AppRouter = () => (
     <BrowserRouter>

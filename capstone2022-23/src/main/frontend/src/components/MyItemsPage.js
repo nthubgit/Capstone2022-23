@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import ShopPage from './ShopPageTest';
+import ShopPage from './ShopPage';
 
 const MyItemsPage = () => (
     <div>

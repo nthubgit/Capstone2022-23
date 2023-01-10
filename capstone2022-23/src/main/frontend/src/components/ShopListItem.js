@@ -35,13 +35,12 @@ const ShopListItem = ({ dispatch, id, title, description, price, thumbnail }) =>
         <Typography gutterBottom>
           {description}
         </Typography>
-        <Typography align="right" variant="h4">
-        ${price}
-      </Typography>
+
       </CardContent>
-      <CardActions>
-        <Button size="small">View</Button>
-        <Button size="small">Edit</Button>
+      <CardActions align="right">
+      <Typography variant="h4">
+      ${price}
+    </Typography>
       </CardActions>
     </Card>
   </Grid>
