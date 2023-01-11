@@ -20,6 +20,8 @@ import ShopListItem from "./ShopListItem";
 import axios from "axios";
 import { retrieveProducts } from "../actions/products";
 import { Redirect } from 'react-router-dom';
+import ShopListFilters from "./ShopListFilters";
+import selectProducts from "../selectors/products";
 
 class ShopPage extends Component {
   fetchProducts = async () => {
@@ -84,19 +86,9 @@ class ShopPage extends Component {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-              >
-                <TextField
-                  id="outlined-search"
-                  label="Search field"
-                  type="search"
-                />
-                <Button variant="outlined">button2</Button>
-              </Stack>
+
+                <ShopListFilters />
+
             </Container>
           </Box>
           <Container sx={{ py: 8 }} maxWidth="md">
@@ -117,9 +109,9 @@ function mapStateToProps(state) {
   const { products } = state.products;
   const { user } = state.auth;
   return {
-    products,
+    // products,
     user,
-    // products: retrieveProducts(state.products),
+    products: selectProducts(state.products.products, state.filters),
   };
 };
 

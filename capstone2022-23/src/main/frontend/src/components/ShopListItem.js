@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
+import StarIcon from '@mui/icons-material/Star';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,10 +12,11 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Rating from '@mui/material/Rating';
 import { Link } from 'react-router-dom';
 import { CardActionArea } from '@mui/material';
 
-const ShopListItem = ({ dispatch, id, title, description, price, thumbnail }) => (
+const ShopListItem = ({ dispatch, id, title, description, price, rating, thumbnail }) => (
     <Grid item key={id} xs={12} sm={6} md={4}>
 
     <Card
@@ -44,8 +45,8 @@ const ShopListItem = ({ dispatch, id, title, description, price, thumbnail }) =>
       <Typography variant="h4">
       ${price}
     </Typography>
+    <Rating name="read-only" value={rating} precision={0.1} readOnly />
       </CardActions>
-
       </Link>
     </Card>
   </Grid>
