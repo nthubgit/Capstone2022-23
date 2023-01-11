@@ -19,31 +19,35 @@ import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
 import { retrieveProducts } from "../actions/products";
+import { Redirect } from 'react-router-dom';
 
 class ShopPage extends Component {
-
   fetchProducts = async () => {
     const response = await axios
-    .get("https://dummyjson.com/products")
-    .catch((err) => {
-        dispatch( {
-            type: ActionTypes.PRODUCTS_ERROR,
-            payload: err,
-        })
+      .get("https://dummyjson.com/products")
+      .catch((err) => {
+        dispatch({
+          type: ActionTypes.PRODUCTS_ERROR,
+          payload: err,
+        });
         console.log("Err", err);
-    });
+      });
     this.props.dispatch(retrieveProducts(response.data));
-};
-
+  };
 
   componentDidMount() {
     this.fetchProducts();
   }
 
   render() {
+    /*Auth*/
+    const { user: currentUser } = this.props;
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
     const { products } = this.props;
     const theme = createTheme();
-    console.log(products);
+
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -111,9 +115,12 @@ class ShopPage extends Component {
 
 function mapStateToProps(state) {
   const { products } = state.products;
+  const { user } = state.auth;
   return {
-    products
+    products,
+    user,
+    // products: retrieveProducts(state.products),
   };
-}
+};
 
 export default connect(mapStateToProps)(ShopPage);

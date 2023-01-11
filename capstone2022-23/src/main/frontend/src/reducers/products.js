@@ -1,5 +1,6 @@
 import {
-    GET_ALL_PRODUCTS
+    GET_ALL_PRODUCTS,
+    GET_ONE_PRODUCT
   } from "../actions/types";
 
 const productsReducerDefaultState = {
@@ -13,6 +14,10 @@ export default (state = productsReducerDefaultState, action) => {
     switch (type) {
         case GET_ALL_PRODUCTS:
             return payload;
+        case GET_ONE_PRODUCT:
+            return {
+                ...state,
+                ...payload}
         default:
             return state;
     }

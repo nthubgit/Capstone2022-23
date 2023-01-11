@@ -11,15 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logout } from "../actions/auth";
 import PersonIcon from "@mui/icons-material/Person";
 import Person from "@mui/icons-material/Person";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,19 +38,18 @@ function Header() {
   };
 
   const logOut = () => {
-    this.props.dispatch(logout());
+  
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <ShoppingBagIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -64,7 +60,7 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Capstone2022-23
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -106,19 +102,18 @@ function Header() {
                   <Typography textAlign="center">Shop</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/myitems" style={{ textDecoration: "none" }}>
+              <Link to="/cart" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">My Items</Typography>
+                  <Typography textAlign="center">Cart</Typography>
                 </MenuItem>
               </Link>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <ShoppingBagIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -130,9 +125,9 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+          Capstone2022-23
           </Typography>
-
+            
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link to="/">
               <Button
@@ -152,12 +147,12 @@ function Header() {
               </Button>
             </Link>
 
-            <Link to="/myitems">
+            <Link to="/cart">
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                My Items
+                Cart
               </Button>
             </Link>
           </Box>
@@ -186,7 +181,7 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link to="/myaccount" style={{ textDecoration: "none" }}>
+              <Link to="/account" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>

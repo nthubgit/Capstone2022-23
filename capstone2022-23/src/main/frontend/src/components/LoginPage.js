@@ -141,6 +141,7 @@ class LoginPage extends Component {
                 id="password"
                 label="Password"
                 name="password"
+                type="password"
                 autoComplete="password"
                 autoFocus
                 value={this.state.password}
