@@ -39,15 +39,17 @@ class ShopPage extends Component {
   };
 
   componentDidMount() {
-    this.fetchProducts();
-  }
-
-  render() {
     /*Auth*/
     const { user: currentUser } = this.props;
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
+
+    this.fetchProducts();
+  }
+
+  render() {
+
     const { products } = this.props;
     const theme = createTheme();
 

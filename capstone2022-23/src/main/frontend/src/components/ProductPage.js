@@ -28,7 +28,6 @@ class ProductPage extends Component {
     const path = "https://dummyjson.com/products/";
     const params = this.getQueryVariable("item");
     const concatPath = path.concat("", params);
-    console.log(params);
     const response = await axios.get(concatPath).catch((err) => {
       dispatch({
         type: PRODUCTS_ERROR,
@@ -36,10 +35,15 @@ class ProductPage extends Component {
       });
       console.log("Err", err);
     });
-    console.log(response);
-    this.props.dispatch(retrieveSingleProduct(response.data));
+    console.log(response.data);
+    //the getOne response is formatted differently than when getAll, so it's easier
+    //to work with if reformatted into "products:" for uniformity
+    const productx={products: response.data};
+    console.log(productx);
+    this.props.dispatch(retrieveSingleProduct(productx));
   };
 
+  //used to get the query variable from the URL which will be used as the ID for the GET
   getQueryVariable(variable) {
     const query = window.location.search.substring(1);
     const vars = query.split("&");
@@ -53,21 +57,23 @@ class ProductPage extends Component {
   }
 
   componentDidMount() {
+    /*Auth*/
+    const { user: currentUser } = this.props;
+
+    // console.log({ products });
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
+
     this.fetchSelectedProduct();
   }
 
   render() {
-    /*Auth*/
-    const { user: currentUser } = this.props;
     const { products } = this.props;
-    console.log({ products });
-    if (!currentUser) {
-      return <Redirect to="/login" />;
-    }
     const theme = createTheme();
 
     return (
-        <div>a</div>
+        <div>{products.title}</div>
     );
   };
 };
