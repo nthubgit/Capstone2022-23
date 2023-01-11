@@ -45,7 +45,7 @@ const ShopListItem = ({ dispatch, id, title, description, price, rating, thumbna
       <Typography variant="h4">
       ${price}
     </Typography>
-    <Rating name="read-only" value={rating} precision={0.1} readOnly />
+    <Rating name="read-only" defaultValue={rating} precision={0.1} readOnly />
       </CardActions>
       </Link>
     </Card>

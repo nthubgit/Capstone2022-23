@@ -6,6 +6,7 @@ import DashboardPage from '../components/DashboardPage';
 import CartPage from '../components/CartPage';
 import MyAccountPage from '../components/MyAccountPage';
 import LoginPage from '../components/LoginPage';
+import LogoutPage from '../components/LogoutPage';
 import RegisterPage from '../components/RegisterPage';
 import NotFoundPage from '../components/NotFoundPage';
 import ShopPage from '../components/ShopPage';
@@ -21,6 +22,7 @@ const AppRouter = () => (
         <Route path="/account" component={MyAccountPage}/>
         <Route path="/register" component={RegisterPage}/>
         <Route path="/login" component={LoginPage}/>
+        <Route path="/logout" component={LogoutPage}/>
         <Route path="/shop" component={ShopPage} exact={true}/>
         <Route path="/product" component={ProductPage}/>
         <Route path="/cart" component={CartPage}/>

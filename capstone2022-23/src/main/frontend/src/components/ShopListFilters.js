@@ -35,7 +35,7 @@ class ShopListFilters extends React.Component {
     >
       <TextField
         id="outlined-search"
-        label="Search field"
+        label="Search Filter"
         type="search"
         onChange={(e) => {
             this.props.dispatch(setTextFilter(e.target.value));
@@ -57,8 +57,8 @@ class ShopListFilters extends React.Component {
         }
       }}
     >
-      <MenuItem value="price">Price</MenuItem>
-      <MenuItem value="rating">Rating</MenuItem>
+      <MenuItem value="price">Price (High to Low)</MenuItem>
+      <MenuItem value="rating">Rating (High to Low)</MenuItem>
     </Select>
     </FormControl>
 

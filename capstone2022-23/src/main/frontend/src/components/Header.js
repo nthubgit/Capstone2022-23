@@ -37,9 +37,6 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  const logOut = () => {
-  
-  };
 
   return (
     <AppBar position="static">
@@ -187,9 +184,11 @@ function Header() {
                 </MenuItem>
               </Link>
 
-              <MenuItem onClick={logout}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
+              <Link to="/logout" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              </Link>
               
             </Menu>
           </Box>

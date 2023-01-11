@@ -73,7 +73,7 @@ class ShopPage extends Component {
                 Shop
               </Typography>
               <Typography
-                variant="h5"
+                variant="h6"
                 align="center"
                 color="text.secondary"
                 paragraph
