@@ -18,6 +18,7 @@ export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 //filters
 
 export const SET_TEXT_FILTER = "SET_TEXT_FILTER";
+export const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
 export const SORT_BY_PRICE = "SORT_BY_PRICE";
 export const SORT_BY_RATING = "SORT_BY_RATING";
 export const SORT_BY_PRICE_LOW = "SORT_BY_PRICE_LOW";

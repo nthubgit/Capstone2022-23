@@ -20,7 +20,9 @@ const ShopListItem = ({ dispatch, id, title, description, price, rating, thumbna
     <Grid item key={id} xs={12} sm={6} md={4}>
 
     <Card
-      sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+      sx={{ height: '100%', display: 'flex', flexDirection: 'column', ':hover': {
+        boxShadow: 20, // theme.shadows[20]
+      },}}
     >
     <Link to={`/product/${id}`} style={{ textDecoration: "none" }} component={CardActionArea}>
       <CardMedia

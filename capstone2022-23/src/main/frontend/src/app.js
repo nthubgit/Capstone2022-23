@@ -12,7 +12,9 @@ const state = store.getState();
 
 const jsx = (
     <Provider store={store}>
+    <React.StrictMode>
         <AppRouter />
+        </React.StrictMode>
     </Provider>
 );
 

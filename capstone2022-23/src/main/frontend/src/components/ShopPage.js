@@ -19,14 +19,14 @@ import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
 import { retrieveProducts } from "../actions/products";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import ShopListFilters from "./ShopListFilters";
 import selectProducts from "../selectors/products";
 
 class ShopPage extends Component {
   fetchProducts = async () => {
     const response = await axios
-      .get("https://dummyjson.com/products")
+      .get("https://dummyjson.com/products?limit=100")
       .catch((err) => {
         dispatch({
           type: ActionTypes.PRODUCTS_ERROR,
@@ -86,13 +86,13 @@ class ShopPage extends Component {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Typography>
-
-                <ShopListFilters />
-
+              {/* Filters */}
+              <ShopListFilters />
             </Container>
           </Box>
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
+            {/* Card Mapping */}
             <Grid container spacing={2}>
               {products.map((card) => {
                 return <ShopListItem key={card.id} {...card} />;
@@ -113,6 +113,6 @@ function mapStateToProps(state) {
     user,
     products: selectProducts(state.products.products, state.filters),
   };
-};
+}
 
 export default connect(mapStateToProps)(ShopPage);
