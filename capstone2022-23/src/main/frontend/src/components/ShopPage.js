@@ -22,6 +22,7 @@ import { retrieveProducts } from "../actions/products";
 import { Redirect } from "react-router-dom";
 import ShopListFilters from "./ShopListFilters";
 import selectProducts from "../selectors/products";
+import { PRODUCTS_ERROR } from "../actions/types";
 
 class ShopPage extends Component {
   fetchProducts = async () => {
@@ -29,7 +30,7 @@ class ShopPage extends Component {
       .get("https://dummyjson.com/products?limit=100")
       .catch((err) => {
         dispatch({
-          type: ActionTypes.PRODUCTS_ERROR,
+          type: PRODUCTS_ERROR,
           payload: err,
         });
         console.log("Err", err);

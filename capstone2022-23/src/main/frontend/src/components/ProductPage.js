@@ -18,11 +18,67 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
-import { retrieveProducts } from "../actions/products";
-import { Redirect } from 'react-router-dom';
+import { retrieveSingleProduct } from "../actions/products";
+import { Redirect } from "react-router-dom";
+import { PRODUCTS_ERROR } from "../actions/types";
 
-const ProductPage = ({ dispatch, id, title, description, price, thumbnail }) => (
-<div>test</div>
-);
-export default ProductPage;
-  
+class ProductPage extends Component {
+  fetchSelectedProduct = async () => {
+    const { user: currentUser } = this.props;
+    const path = "https://dummyjson.com/products/";
+    const params = this.getQueryVariable("item");
+    const concatPath = path.concat("", params);
+    console.log(params);
+    const response = await axios.get(concatPath).catch((err) => {
+      dispatch({
+        type: PRODUCTS_ERROR,
+        payload: err,
+      });
+      console.log("Err", err);
+    });
+    console.log(response);
+    this.props.dispatch(retrieveSingleProduct(response.data));
+  };
+
+  getQueryVariable(variable) {
+    const query = window.location.search.substring(1);
+    const vars = query.split("&");
+    for (let i = 0; i < vars.length; i++) {
+      let pair = vars[i].split("=");
+      if (pair[0] == variable) {
+        return pair[1];
+      }
+    }
+    return false;
+  }
+
+  componentDidMount() {
+    this.fetchSelectedProduct();
+  }
+
+  render() {
+    /*Auth*/
+    const { user: currentUser } = this.props;
+    const { products } = this.props;
+    console.log({ products });
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
+    const theme = createTheme();
+
+    return (
+        <div>a</div>
+    );
+  };
+};
+
+function mapStateToProps(state) {
+  const { user } = state.auth;
+  const { products } = state.products;
+  return {
+    products,
+    user,
+  };
+}
+
+export default connect(mapStateToProps)(ProductPage);

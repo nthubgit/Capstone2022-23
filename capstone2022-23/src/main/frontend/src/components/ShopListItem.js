@@ -24,7 +24,7 @@ const ShopListItem = ({ dispatch, id, title, description, price, rating, thumbna
         boxShadow: 20, // theme.shadows[20]
       },}}
     >
-    <Link to={`/product/${id}`} style={{ textDecoration: "none" }} component={CardActionArea}>
+    <Link to={`/product/?item=${id}`} style={{ textDecoration: "none" }} component={CardActionArea}>
       <CardMedia
         component="img"
         sx={{

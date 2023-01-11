@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
-import { retrieveProducts, retrieveSingleProduct } from "../actions/products";
+import { retrieveSingleProduct } from "../actions/products";
 import { Redirect } from "react-router-dom";
 import CartListItem from "./CartListItem";
 
