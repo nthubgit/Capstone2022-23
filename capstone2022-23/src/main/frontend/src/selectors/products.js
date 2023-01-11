@@ -14,5 +14,11 @@ export default (products, { text, sortBy }) => {
         } else if (sortBy == 'rating') {
             return a.rating < b.rating ? 1 : -1
         }
+        else if (sortBy == 'price_low') {
+            return a.price > b.price ? 1 : -1
+        }
+        else if (sortBy == 'rating_low') {
+            return a.rating > b.rating ? 1 : -1
+        }
     });
 };

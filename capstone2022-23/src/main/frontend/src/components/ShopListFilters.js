@@ -11,7 +11,9 @@ import FormControl from '@mui/material/FormControl';
 import {
   setTextFilter,
   sortByPrice,
+  sortByPriceLow,
   sortByRating,
+  sortByRatingLow,
 } from "../actions/filters";
 
 class ShopListFilters extends React.Component {
@@ -55,10 +57,18 @@ class ShopListFilters extends React.Component {
         } else if (e.target.value === "rating") {
           this.props.dispatch(sortByRating(e.target.value));
         }
+        else if (e.target.value === "price_low") {
+            this.props.dispatch(sortByPriceLow(e.target.value));
+          }
+          else if (e.target.value === "rating_low") {
+            this.props.dispatch(sortByRatingLow(e.target.value));
+          }
       }}
     >
       <MenuItem value="price">Price (High to Low)</MenuItem>
+      <MenuItem value="price_low">Price (Low to High)</MenuItem>
       <MenuItem value="rating">Rating (High to Low)</MenuItem>
+      <MenuItem value="rating_low">Rating (Low to High)</MenuItem>
     </Select>
     </FormControl>
 

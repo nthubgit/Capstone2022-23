@@ -1,6 +1,8 @@
 import {
     SORT_BY_PRICE,
     SORT_BY_RATING,
+    SORT_BY_PRICE_LOW,
+    SORT_BY_RATING_LOW,
     SET_TEXT_FILTER
   } from "./types";
 
@@ -15,4 +17,11 @@ export const sortByPrice = () => ({
 
 export const sortByRating = () => ({
     type: SORT_BY_RATING
+})
+export const sortByPriceLow = () => ({
+    type: SORT_BY_PRICE_LOW
+})
+
+export const sortByRatingLow = () => ({
+    type: SORT_BY_RATING_LOW
 })
