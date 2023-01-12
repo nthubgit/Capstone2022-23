@@ -29,7 +29,7 @@ const ShopListItem = ({ dispatch, id, title, description, price, rating, thumbna
         component="img"
         sx={{
           // 16:9
-          pt: '56.25%',
+          pt: '10%',
         }}
         image={thumbnail}
         alt="random"

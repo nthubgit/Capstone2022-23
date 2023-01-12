@@ -25,6 +25,10 @@ import selectProducts from "../selectors/products";
 import { PRODUCTS_ERROR } from "../actions/types";
 
 class ShopPage extends Component {
+  constructor(props) {
+    super(props);
+}
+
   fetchProducts = async () => {
     const response = await axios
       .get("https://dummyjson.com/products?limit=100")
@@ -51,6 +55,7 @@ class ShopPage extends Component {
   render() {
 
     const { products } = this.props;
+    console.log("test");
     const theme = createTheme();
 
     return (

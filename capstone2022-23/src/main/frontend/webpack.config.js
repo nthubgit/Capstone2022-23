@@ -16,7 +16,7 @@ module.exports = {
         },
         {
             use: [
-       
+                
             ], 
             test: /\.s?css$/
         }
