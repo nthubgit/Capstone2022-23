@@ -31,6 +31,28 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckoutModal from "./CheckoutModal";
 
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  HatenaShareButton,
+  InstapaperShareButton,
+  LineShareButton,
+  LinkedinShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  OKShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TumblrShareButton,
+  TwitterShareButton,
+  ViberShareButton,
+  VKShareButton,
+  WhatsappShareButton,
+  WorkplaceShareButton
+} from "react-share";
+
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
 }
@@ -53,7 +75,7 @@ class CartPage extends Component {
   render() {
     const { carts } = this.props.carts;
     const { carts: discountedTotal } = this.props;
-    // console.log(discountedTotal.discountedTotal);
+    console.log(discountedTotal.discountedTotal);
     // console.log(carts);
       /*Auth*/
       const { user: currentUser } = this.props;
@@ -64,7 +86,7 @@ class CartPage extends Component {
       const theme = createTheme();
 
       const TAX_RATE = 0.15;
-      const invoiceSubtotal = 4;
+      const invoiceSubtotal = discountedTotal.discountedTotal ? discountedTotal.discountedTotal : 0
       const invoiceTaxes = TAX_RATE * invoiceSubtotal;
       const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
@@ -95,7 +117,7 @@ class CartPage extends Component {
               <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" colSpan={3}>
+                    <TableCell align="center" colSpan={4}>
                       Details
                     </TableCell>
                     <TableCell align="right">Price</TableCell>
@@ -116,22 +138,22 @@ class CartPage extends Component {
                     <TableCell rowSpan={3} />
                     <TableCell colSpan={3}>Subtotal</TableCell>
                     <TableCell align="right">
-                      {ccyFormat(invoiceSubtotal)}
+                      ${ccyFormat(invoiceSubtotal)}
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Tax</TableCell>
+                    <TableCell colSpan={2}>Tax</TableCell>
                     <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
                       0
                     )} %`}</TableCell>
-                    <TableCell align="right">
-                      {ccyFormat(invoiceTaxes)}
+                    <TableCell align="right" colSpan={2}>
+                      ${ccyFormat(invoiceTaxes)}
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell colSpan={3}>Total</TableCell>
                     <TableCell align="right">
-                      {ccyFormat(invoiceTotal)}
+                      ${ccyFormat(invoiceTotal)}
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -139,6 +161,13 @@ class CartPage extends Component {
             </TableContainer>
             <Container align="center">
             <CheckoutModal />
+            
+                      <FacebookShareButton 
+                      quote= "ok"
+                      hastag= "#dog"/>
+                      <TwitterShareButton />
+                      
+        
             </Container>
           </Box>
         </ThemeProvider>

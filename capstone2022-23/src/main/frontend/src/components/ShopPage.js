@@ -27,6 +27,9 @@ import { PRODUCTS_ERROR } from "../actions/types";
 class ShopPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      products: []
+    }
 }
 
   componentDidMount() {
@@ -35,15 +38,14 @@ class ShopPage extends Component {
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
-
-    // this.fetchProducts();
     this.props.retrieveProducts();
   }
 
   render() {
 
+    
     const { products } = this.props;
-    console.log("test");
+    console.log(this.props.products);
     const theme = createTheme();
 
     return (

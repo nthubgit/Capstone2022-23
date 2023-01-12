@@ -19,6 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import { retrieveSingleProduct } from "../actions/products";
 import { Redirect } from "react-router-dom";
+import ShopListItem from "./ShopListItem";
 
 const theme = createTheme();
 
@@ -27,18 +28,15 @@ class DashboardPage extends Component {
     super(props);
   }
   componentDidMount() {
-    /*Auth*/
-    //   const { user: currentUser } = this.props;
-    //   if (!currentUser) {
-    //     return <Redirect to="/login" />;
-    //   }
-    // const getId = currentUser.id;
-    const params = 4;
+
+    //gets a random num from 1-100 to fetch a random product
+    const params = Math.floor(Math.random() * 100) + 1;
     this.props.retrieveSingleProduct(params);
   }
 
   render() {
     const { products } = this.props;
+    console.log ( products.products )
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -76,14 +74,26 @@ class DashboardPage extends Component {
               </Typography>
               <Typography
                 component="h1"
-                variant="h4"
+                variant="h3"
                 align="center"
                 color="text.primary"
                 gutterBottom
               >
                 Random Product
               </Typography>
+              </Container>
+              <Container sx={{ py: 4 }} maxWidth="sm">
+              <ShopListItem 
+              id={products.id}
+              title={products.title}
+              description={products.description}
+              price={products.price}
+              rating={products.rating?products.products.rating :""}
+              thumbnail={products.thumbnail}
+              />
+
             </Container>
+            
           </Box>
         </main>
       </ThemeProvider>
@@ -94,7 +104,7 @@ class DashboardPage extends Component {
 function mapStateToProps(state) {
   const { products } = state.products;
   return {
-    products: state.products,
+    products: state.products
   };
 }
 

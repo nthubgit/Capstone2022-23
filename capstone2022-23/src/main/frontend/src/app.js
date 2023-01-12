@@ -6,8 +6,6 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
-// console.warn = () => {}
-
 const state = store.getState();
 
 const jsx = (
