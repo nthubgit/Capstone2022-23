@@ -179,7 +179,7 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link to="/review" style={{ textDecoration: "none" }}>
+              <Link to="/account" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>

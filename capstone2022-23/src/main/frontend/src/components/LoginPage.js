@@ -45,13 +45,15 @@ class LoginPage extends Component {
       username: "",
       password: "",
       loading: false,
+      message: ""
     };
   }
 
   onChangeUsername(e) {
     this.setState({
       username: e.target.value,
-    });
+    })
+    console.log(username);
   }
 
   onChangePassword(e) {
@@ -148,7 +150,7 @@ class LoginPage extends Component {
                 onChange={this.onChangePassword}
                 validations={[required]}
               />
-
+              {/*Login Button*/}
               <div className="form-group">
                 <button
                   className="btn btn-primary btn-block"
@@ -159,13 +161,14 @@ class LoginPage extends Component {
                   )}
                   <span>Login</span>
                 </button>
+                {/*Register Button*/}
                 <Grid item>
-                <Link to="/register" variant="body2">
-                Click here to register a new account.
-              </Link>
-              </Grid>
+                  <Link to="/register" variant="body2">
+                    Click here to register a new account.
+                  </Link>
+                </Grid>
               </div>
-
+              {/*Alert*/}
               {message && (
                 <div className="form-group">
                   <div className="alert alert-danger" role="alert">
