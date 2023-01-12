@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
+
 import Button from "@mui/material/Button";
 import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Card from "@mui/material/Card";
@@ -15,43 +19,24 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { connect } from "react-redux";
-import ShopListItem from "./ShopListItem";
-import axios from "axios";
-import { retrieveSingleProduct } from "../actions/products";
-import { Redirect } from "react-router-dom";
-import { PRODUCTS_ERROR } from "../actions/types";
-import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Rating from "@mui/material/Rating";
+import { styled } from "@mui/material/styles";
+
+import ReviewListItem from "./ReviewListItems";
+
+import { retrieveSingleProduct } from "../actions/products";
+
+import { PRODUCTS_ERROR } from "../actions/types";
+
+import { retrieveReviews } from "../actions/reviews";
+
+
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-    };
   }
-
-  fetchSelectedProduct = async () => {
-    const { user: currentUser } = this.props;
-    const path = "https://dummyjson.com/products/";
-    const params = this.getQueryVariable("item");
-    const concatPath = path.concat("", params);
-    const response = await axios.get(concatPath).catch((err) => {
-      dispatch({
-        type: PRODUCTS_ERROR,
-        payload: err,
-      });
-      console.log("Err", err);
-    });
-    console.log(response.data);
-    //the getOne response is formatted differently than when getAll, so it's easier
-    //to work with if reformatted into "products:" for uniformity
-    const productx = { products: response.data };
-    console.log(productx);
-    this.props.dispatch(retrieveSingleProduct(productx));
-  };
 
   //used to get the query variable from the URL which will be used as the ID for the GET
   getQueryVariable = (variable) => {
@@ -66,19 +51,18 @@ class ProductPage extends Component {
     return false;
   };
 
-  setFalse = () => {
-    this.setState({ loading: false });
-  };
-
   componentDidMount() {
     /*Auth*/
     const { user: currentUser } = this.props;
-    console.log("compdidmount");
-    // console.log({ products });
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
-    this.fetchSelectedProduct();
+    const getId = currentUser.id;
+    const params = this.getQueryVariable("item");
+    console.log(params);
+    this.props.retrieveSingleProduct(params);
+    this.props.retrieveReviews(getId);
+     // this.fetchSelectedProduct();
   }
 
   render() {
@@ -201,11 +185,11 @@ class ProductPage extends Component {
 function mapStateToProps(state) {
   const { user } = state.auth;
   const { products } = state.products;
-  const { loading } = state.products.loading;
   return {
-    products,
+    products: state.products,
     user,
+    reviews: state.reviews
   };
 }
 
-export default connect(mapStateToProps)(ProductPage);
+export default connect(mapStateToProps, {retrieveReviews, retrieveSingleProduct })(ProductPage);

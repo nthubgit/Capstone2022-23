@@ -1,13 +1,15 @@
-import { dummyjson } from "../http-common";
+import http from "../http-dummy";
 
 class ProductsService {
   getAll() {
-    return dummyjson.get("/products/?limit=100");
+    return http.get("/products?limit=100");
   }
   getOne(id) {
-    return dummyjson.get("/products");
+    return http.get(`/products/${id}`);
+  }
+  getCart(id) {
+    return http.get(`/carts/${id}`);
   }
 }
-
 
 export default new ProductsService();

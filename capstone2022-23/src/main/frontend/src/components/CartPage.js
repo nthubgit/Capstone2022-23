@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
-import { retrieveSingleProduct } from "../actions/products";
+import { retrieveSingleCart } from "../actions/products";
 import { Redirect } from "react-router-dom";
 import CartListItem from "./CartListItem";
 
@@ -35,25 +35,28 @@ function ccyFormat(num) {
 }
 
 class CartPage extends Component {
-  fetchCart = async () => {
-    const { user: currentUser } = this.props;
-    const path = "https://dummyjson.com/carts/";
-    const getId = currentUser.id;
-    const concatPath = path.concat("", getId);
+  // fetchCart = async () => {
+  //   const { user: currentUser } = this.props;
+  //   const path = "https://dummyjson.com/carts/";
+  //   const getId = currentUser.id;
+  //   const concatPath = path.concat("", getId);
     
-    const response = await axios.get(concatPath).catch((err) => {
-      dispatch({
-        type: ActionTypes.PRODUCTS_ERROR,
-        payload: err,
-      });
-      console.log("Err", err);
-    });
-    console.log(response.data);
-    this.props.dispatch(retrieveSingleProduct(response.data));
-  };
+  //   const response = await axios.get(concatPath).catch((err) => {
+  //     dispatch({
+  //       type: ActionTypes.PRODUCTS_ERROR,
+  //       payload: err,
+  //     });
+  //     console.log("Err", err);
+  //   });
+  //   console.log(response.data);
+  //   this.props.dispatch(retrieveSingleProduct(response.data));
+  // };
 
   componentDidMount() {
-    this.fetchCart();
+    const { user: currentUser } = this.props;
+    const getId = currentUser.id;
+    console.log(getId);
+    this.props.retrieveSingleCart(getId);
   }
 
   render() {
@@ -153,8 +156,8 @@ function mapStateToProps(state) {
   const { products } = state.products;
   return {
     user,
-    products,
+    products: state.products.products,
   };
 }
 
-export default connect(mapStateToProps)(CartPage);
+export default connect(mapStateToProps, { retrieveSingleCart })(CartPage);

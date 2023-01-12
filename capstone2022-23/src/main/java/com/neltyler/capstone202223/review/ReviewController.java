@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.account;
+package com.neltyler.capstone202223.review;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -6,37 +6,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(path = "api/users")
-public class AccountController {
+@RequestMapping(path = "api/reviews")
+public class ReviewController {
 
-    private final AccountService accountService;
+    private final ReviewService reviewService;
 
     //controller
     @Autowired
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService;
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
     }
 
     @GetMapping
-    public List<Account> getAccounts() {
-    return accountService.getAccounts();
+    public List<Review> retrieveReviews() {
+        return reviewService.retrieveReviews();
     }
 
     @PostMapping
-    public void registerNewAccount(@RequestBody Account account) {
-        accountService.registerNewAccount(account);
+    public void createReview(@RequestBody Review review) {
+        reviewService.createReview(review);
     }
-    @DeleteMapping (path = "{accountId}")
-    public void deleteAccount(@PathVariable("accountId") Long accountId) {
-        accountService.deleteAccount(accountId);
+    @DeleteMapping (path = "{reviewId}")
+    public void deleteReview(@PathVariable("reviewId") Long reviewId) {
+        reviewService.deleteReview(reviewId);
     }
-    @PutMapping (path = "{accountId}")
-    public void updateAccount(
-            @PathVariable("accountId") Long accountId,
-            @RequestParam(required = false) String password)
-    {
-        accountService.updateAccount(accountId, password);
-    }
+//    @PutMapping (path = "{reviewId}")
+//    public void updateReview(
+//            @PathVariable("reviewId") Long reviewId,
+//            @RequestParam(required = false) String password)
+//    {
+//        reviewService.updateReview(reviewId, password);
+//    }
 
 
 }

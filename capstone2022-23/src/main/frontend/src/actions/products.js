@@ -18,10 +18,23 @@ import {
   };
 
   export const retrieveSingleProduct = (product) => async (dispatch) => {
+    const res = await productsService.getOne(product); 
     try {
       dispatch({
         type: GET_ONE_PRODUCT,
-        payload: product,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const retrieveSingleCart = (cart) => async (dispatch) => {
+    const res = await productsService.getCart(cart); 
+    try {
+      dispatch({
+        type: GET_ONE_PRODUCT,
+        payload: res.data,
       });
     } catch (err) {
       console.log(err);

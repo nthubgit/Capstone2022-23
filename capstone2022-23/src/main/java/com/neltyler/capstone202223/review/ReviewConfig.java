@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.account;
+package com.neltyler.capstone202223.review;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -10,31 +10,23 @@ import java.util.List;
 import static java.time.Month.*;
 
 @Configuration
-public class AccountConfig {
+public class ReviewConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(AccountRepository accountRepository) {
+    CommandLineRunner commandLineRunner(ReviewRepository reviewRepository) {
         return args -> {
-            Account admin = new Account(
-                    1,
-                    "Tyler",
-                    "Nelson",
-                    LocalDate.of(1990, JULY, 27),
-                    "admin@gmail.com",
-                    "123456"
+            Review review1 = new Review(
+                    1L,
+                    "admin",
+                    "cool review text goes here",
+                    LocalDate.of(2023, JANUARY, 5),
+                    3.5,
+                    9
+
             );
 
-            Account basic = new Account(
-                    2,
-                    "Mike",
-                    "Potash",
-                    LocalDate.of(2004, JULY, 11),
-                    "mikeP@gmail.com",
-                    "1"
-            );
-
-            accountRepository.saveAll(
-                    List.of(admin, basic)
+            reviewRepository.saveAll(
+                    List.of(review1)
             );
         };
     };

@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.account;
+package com.neltyler.capstone202223.review;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,46 +8,47 @@ import java.util.List;
 import java.util.Optional;
 
 @Service //bean
-public class AccountService {
+public class ReviewService {
 
-    private final AccountRepository accountRepository;
+    private final ReviewRepository reviewRepository;
 
     @Autowired
-    public AccountService(AccountRepository userRepository) {
-        this.accountRepository = userRepository;
+    public ReviewService(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
     }
 
-    public List<Account> getAccounts() {
-        return accountRepository.findAll();
+    public List<Review> retrieveReviews() {
+        return reviewRepository.findAll();
     }
 
-    public void registerNewAccount(Account account){
-        Optional<Account> accountOptional = accountRepository.findAccountByEmail(account.getEmail());
-        if (accountOptional.isPresent()) {
-            throw new IllegalStateException("Email has already been taken.");
-        }
-        accountRepository.save(account);
+    public void createReview(Review review){
+//        Optional<Review> reviewOptional = reviewRepository.findAccountByEmail(review.getEmail());
+//        if (accountOptional.isPresent()) {
+//            throw new IllegalStateException("Email has already been taken.");
+//        }
+        reviewRepository.save(review);
     }
-    public void deleteAccount(Long accountId) {
-        boolean checkExists = accountRepository.existsById(accountId);
+    public void deleteReview(Long reviewId) {
+        boolean checkExists = reviewRepository.existsById(reviewId);
         if (!checkExists) {
-            throw new IllegalStateException("Account does not exist, check ID: " + accountId + ".");
+            throw new IllegalStateException("Review does not exist, check ID: " + reviewId + ".");
         }
         else {
-            accountRepository.deleteById(accountId);
-        }
-    }
-    @Transactional
-    public void updateAccount(Long accountId, String password) {
-        Account account = accountRepository.findById(accountId).orElseThrow(() ->
-                new IllegalStateException("Account does not exist, check ID: " + accountId + "."));
+            reviewRepository.deleteById(reviewId);
 
-        if (password != null && password.length() > 0) {
-            account.setPassword(password);
-        }
-        else {
-            throw new IllegalStateException("Password does not meet the conditions, try again.");
         }
     }
+//    @Transactional
+//    public void updateReview(Long reviewId, String reviewText) {
+//        Review review = reviewRepository.findById(accountId).orElseThrow(() ->
+//                new IllegalStateException("Review does not exist, check ID: " + accountId + "."));
+//
+//        if (password != null && password.length() > 0) {
+//            review.setPassword(password);
+//        }
+//        else {
+//            throw new IllegalStateException("Password does not meet the conditions, try again.");
+//        }
+//    }
 
 }

@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.account;
+package com.neltyler.capstone202223.review;
 
 
 import javax.persistence.*;
@@ -7,41 +7,47 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class Account {
+public class Review {
     @Id
     @SequenceGenerator(
-            name = "account_sequence",
-            sequenceName = "account_sequence",
+            name = "review_sequence",
+            sequenceName = "review_sequence",
             allocationSize= 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "account_sequence"
+            generator = "review_sequence"
     )
     private long id;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
-    private String email;
-    private String password; //encrypt this later maybe
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user.username")
+    private String username;
+    private String reviewText;
+    private LocalDate createdAt;
+    private Double rating;
 
-    public Account() {
+    private Integer itemId;
+
+
+
+    public Review() {
     }
-    public Account(long id, String firstName, String lastName, LocalDate dob, String email, String password) {
+
+    public Review(long id, String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.email = email;
-        this.password = password;
+        this.username = username;
+        this.reviewText = reviewText;
+        this.createdAt = createdAt;
+        this.rating = rating;
+        this.itemId = itemId;
     }
 
-    public Account(String firstName, String lastName, LocalDate dob, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.email = email;
-        this.password = password;
+    public Review(String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
+        this.username = username;
+        this.reviewText = reviewText;
+        this.createdAt = createdAt;
+        this.rating = rating;
+        this.itemId = itemId;
     }
 
     public long getId() {
@@ -52,55 +58,55 @@ public class Account {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getReviewText() {
+        return reviewText;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
-    public LocalDate getDob() {
-        return dob;
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getEmail() {
-        return email;
+    public Double getRating() {
+        return rating;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getItemId() {
+        return itemId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
     }
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "Review{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dob=" + dob +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", reviewText='" + reviewText + '\'' +
+                ", createdAt=" + createdAt +
+                ", rating=" + rating +
+                ", itemId=" + itemId +
                 '}';
     }
 }
