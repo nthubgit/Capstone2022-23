@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import ShopListItem from "./ShopListItem";
 import axios from "axios";
-import { retrieveSingleCart } from "../actions/products";
+import { retrieveSingleCart } from "../actions/carts";
 import { Redirect } from "react-router-dom";
 import CartListItem from "./CartListItem";
 
@@ -35,49 +35,40 @@ function ccyFormat(num) {
 }
 
 class CartPage extends Component {
-  // fetchCart = async () => {
-  //   const { user: currentUser } = this.props;
-  //   const path = "https://dummyjson.com/carts/";
-  //   const getId = currentUser.id;
-  //   const concatPath = path.concat("", getId);
-    
-  //   const response = await axios.get(concatPath).catch((err) => {
-  //     dispatch({
-  //       type: ActionTypes.PRODUCTS_ERROR,
-  //       payload: err,
-  //     });
-  //     console.log("Err", err);
-  //   });
-  //   console.log(response.data);
-  //   this.props.dispatch(retrieveSingleProduct(response.data));
-  // };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     carts: "",
+  //   };
+  // }
 
   componentDidMount() {
     const { user: currentUser } = this.props;
     const getId = currentUser.id;
     console.log(getId);
+    console.log("did mount");
     this.props.retrieveSingleCart(getId);
   }
 
   render() {
-    /*Auth*/
-    const { user: currentUser } = this.props;
-    if (!currentUser) {
-      return <Redirect to="/login" />;
-    }
-    const { products } = this.props;
-    console.log({ products });
-    const theme = createTheme();
+    const { carts } = this.props.carts;
+    console.log(this.props);
+      /*Auth*/
+      const { user: currentUser } = this.props;
+      if (!currentUser) {
+        return <Redirect to="/login" />;
+      }
 
-    
-    const TAX_RATE = 0.15;
-    const invoiceSubtotal = 144;
-    const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-    const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+      const theme = createTheme();
 
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      const TAX_RATE = 0.15;
+      const invoiceSubtotal = 144;
+      const invoiceTaxes = TAX_RATE * invoiceSubtotal;
+      const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+
+      return (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
 
           {/* Hero unit */}
           <Box
@@ -116,7 +107,7 @@ class CartPage extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products.map((card) => {
+                  {carts.map((card) => {
                     return <CartListItem key={card.id} {...card} />;
                   })}
                   <TableRow>
@@ -127,7 +118,7 @@ class CartPage extends Component {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell >Tax</TableCell>
+                    <TableCell>Tax</TableCell>
                     <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
                       0
                     )} %`}</TableCell>
@@ -145,18 +136,18 @@ class CartPage extends Component {
               </Table>
             </TableContainer>
           </Box>
-  
-      </ThemeProvider>
-    );
+        </ThemeProvider>
+      );
+    
   }
 }
 
 function mapStateToProps(state) {
+  const { carts } = state.carts;
   const { user } = state.auth;
-  const { products } = state.products;
   return {
     user,
-    products: state.products.products,
+    carts: state.carts,
   };
 }
 

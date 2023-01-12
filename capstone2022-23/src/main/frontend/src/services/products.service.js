@@ -7,9 +7,6 @@ class ProductsService {
   getOne(id) {
     return http.get(`/products/${id}`);
   }
-  getCart(id) {
-    return http.get(`/carts/${id}`);
-  }
 }
 
 export default new ProductsService();

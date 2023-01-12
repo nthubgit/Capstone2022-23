@@ -27,11 +27,6 @@ export default (state = productsReducerDefaultState, action) => {
         ...state,
         ...payload,
       };
-    case GET_ONE_CART:
-      return {
-        ...state,
-        ...payload,
-      };
     case PRODUCTS_ERROR:
       return {
         error: payload,

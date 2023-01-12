@@ -29,14 +29,3 @@ import {
     }
   };
 
-  export const retrieveSingleCart = (cart) => async (dispatch) => {
-    const res = await productsService.getCart(cart); 
-    try {
-      dispatch({
-        type: GET_ONE_PRODUCT,
-        payload: res.data,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
