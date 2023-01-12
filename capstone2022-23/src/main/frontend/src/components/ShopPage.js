@@ -29,19 +29,6 @@ class ShopPage extends Component {
     super(props);
 }
 
-  // fetchProducts = async () => {
-  //   const response = await axios
-  //     .get("https://dummyjson.com/products?limit=100")
-  //     .catch((err) => {
-  //       dispatch({
-  //         type: PRODUCTS_ERROR,
-  //         payload: err,
-  //       });
-  //       console.log("Err", err);
-  //     });
-  //   this.props.dispatch(retrieveProducts(response.data));
-  // };
-
   componentDidMount() {
     /*Auth*/
     const { user: currentUser } = this.props;

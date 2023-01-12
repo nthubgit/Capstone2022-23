@@ -11,7 +11,8 @@ export default (state = cartsReducerDefaultState, action) => {
     case GET_ONE_CART:
       return {
         ...state,
-        ...payload.products,
+        carts: payload.products,
+        ...payload
       };
     default:
       return state;

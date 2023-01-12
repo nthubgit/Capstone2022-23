@@ -29,18 +29,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CheckoutModal from "./CheckoutModal";
 
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
 }
 
 class CartPage extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     carts: "",
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    
+    this.discountedTotal = 0;
+  }
 
   componentDidMount() {
     const { user: currentUser } = this.props;
@@ -52,7 +52,9 @@ class CartPage extends Component {
 
   render() {
     const { carts } = this.props.carts;
-    console.log(this.props);
+    const { carts: discountedTotal } = this.props;
+    // console.log(discountedTotal.discountedTotal);
+    // console.log(carts);
       /*Auth*/
       const { user: currentUser } = this.props;
       if (!currentUser) {
@@ -62,7 +64,7 @@ class CartPage extends Component {
       const theme = createTheme();
 
       const TAX_RATE = 0.15;
-      const invoiceSubtotal = 144;
+      const invoiceSubtotal = 4;
       const invoiceTaxes = TAX_RATE * invoiceSubtotal;
       const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
@@ -135,6 +137,9 @@ class CartPage extends Component {
                 </TableBody>
               </Table>
             </TableContainer>
+            <Container align="center">
+            <CheckoutModal />
+            </Container>
           </Box>
         </ThemeProvider>
       );

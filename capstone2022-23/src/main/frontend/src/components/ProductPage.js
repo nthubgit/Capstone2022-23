@@ -26,10 +26,10 @@ import { styled } from "@mui/material/styles";
 import ReviewListItem from "./ReviewListItems";
 
 import { retrieveSingleProduct } from "../actions/products";
+import { retrieveReviews } from "../actions/reviews";
 
 import { PRODUCTS_ERROR } from "../actions/types";
 
-import { retrieveReviews } from "../actions/reviews";
 
 
 
@@ -37,7 +37,6 @@ class ProductPage extends Component {
   constructor(props) {
     super(props);
   }
-
   //used to get the query variable from the URL which will be used as the ID for the GET
   getQueryVariable = (variable) => {
     const query = window.location.search.substring(1);
@@ -59,14 +58,14 @@ class ProductPage extends Component {
     }
     const getId = currentUser.id;
     const params = this.getQueryVariable("item");
-    console.log(params);
+
     this.props.retrieveSingleProduct(params);
     this.props.retrieveReviews(getId);
-     // this.fetchSelectedProduct();
   }
 
   render() {
     const { products } = this.props;
+    const { reviews } = this.props;
     const imageProp = this.props.products.images;
     const theme = createTheme();
     console.log("render");
@@ -175,6 +174,24 @@ class ProductPage extends Component {
                 <br /> {products.stock}</Item>
               </Grid>
             </Grid>
+              {/* Reviews*/}
+            <Grid container spacing={4}>
+            <Grid item xs={12}>
+            <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              color="text.primary"
+              gutterBottom
+              style={{ marginTop: 16 }}
+            >
+              Reviews
+            </Typography>
+          </Grid>
+          {reviews.map((review) => {
+            return <ReviewListItem key={review.id} {...review} />;
+          })}
+            </Grid>
           </Container>
         </Box>
       </ThemeProvider>
@@ -185,6 +202,7 @@ class ProductPage extends Component {
 function mapStateToProps(state) {
   const { user } = state.auth;
   const { products } = state.products;
+  const { reviews } = state.reviews;
   return {
     products: state.products,
     user,
