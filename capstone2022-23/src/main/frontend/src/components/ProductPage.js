@@ -21,9 +21,11 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Rating from "@mui/material/Rating";
+import Divider from '@mui/material/Divider';
 import { styled } from "@mui/material/styles";
 
 import ReviewListItem from "./ReviewListItems";
+import ReviewModal from "./ReviewModal";
 
 import { retrieveSingleProduct } from "../actions/products";
 import { retrieveReviewsOfProduct } from "../actions/reviews";
@@ -67,6 +69,7 @@ class ProductPage extends Component {
   render() {
     const { products } = this.props;
     const { reviews } = this.props;
+    const { user: currentUser } = this.props;
     const imageProp = this.props.products.images;
     const theme = createTheme();
     console.log("render");
@@ -175,19 +178,22 @@ class ProductPage extends Component {
                 <br /> {products.stock}</Item>
               </Grid>
             </Grid>
+            <br />
+            <Divider />
               {/* Reviews*/}
             <Grid container spacing={4}>
             <Grid item xs={12}>
             <Typography
               component="h1"
               variant="h4"
-              align="center"
+              align="left"
               color="text.primary"
               gutterBottom
               style={{ marginTop: 16 }}
             >
               Reviews
             </Typography>
+            <ReviewModal {...currentUser} product={products.id}/>
           </Grid>
           {reviews.map((review) => {
             return <ReviewListItem key={review.id} {...review} />;

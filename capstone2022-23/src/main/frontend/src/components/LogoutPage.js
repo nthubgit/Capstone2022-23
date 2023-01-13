@@ -4,37 +4,38 @@ import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 
 class LogoutPage extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.logOut = this.logOut.bind(this);
-    };
+  logOut() {
+    this.props.dispatch(logout());
+  }
 
-    logOut() {
-        this.props.dispatch(logout());
-      }
+  componentDidUpdate(prevProps) {
+      this.props.history.push("/")
+  }
 
-      componentDidMount() {
-        const user = this.props.user;
-    
-        if (user) {
-          this.setState(this.logOut);
-        }
-      }
-
-render() {
-
-    return (
-<div>ok</div>
-    );
+  render() {
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn === true) {
+      this.setState(this.logOut);
+    }
+    // else if (isLoggedIn === false){
+    //   return <Redirect to="/"/>;
+    // }
+    return <div>ok</div>;
   }
 }
 
 function mapStateToProps(state) {
-    const { user } = state.auth;
-    return {
-      user,
-    };
-  }
-  
-  export default connect(mapStateToProps)(LogoutPage);
+  const { user } = state.auth;
+  const { isLoggedIn } = state.auth;
+  return {
+    isLoggedIn,
+    user,
+  };
+}
+
+export default connect(mapStateToProps)(LogoutPage);
