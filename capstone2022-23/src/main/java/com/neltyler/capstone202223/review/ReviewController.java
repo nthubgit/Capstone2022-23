@@ -70,6 +70,7 @@ public class ReviewController {
                 .orElseThrow(() -> new ResourceNotFoundException("ReviewId " + id + "not found"));
 
         review.setReviewText(reviewRequest.getReviewText());
+        review.setRating(reviewRequest.getRating());
 
         return new ResponseEntity<>(ReviewRepository.save(review), HttpStatus.OK);
     }

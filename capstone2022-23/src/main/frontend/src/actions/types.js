@@ -9,8 +9,8 @@ export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const RETRIEVE_REVIEWS = "RETRIEVE_REVIEWS";
-export const UPDATE_REVIEWS = "UPDATE_REVIEWS";
-export const DELETE_REVIEWS = "DELETE_REVIEWS";
+export const UPDATE_REVIEW = "UPDATE_REVIEWS";
+export const DELETE_REVIEW = "DELETE_REVIEWS";
 
 //products
 

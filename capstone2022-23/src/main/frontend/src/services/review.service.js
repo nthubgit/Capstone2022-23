@@ -14,10 +14,6 @@ class ReviewService {
   delete(id) {
     return http.delete(`/reviews/${id}`);
   }
-  //tbd
-  getOne(id) {
-    return http.get(`/reviews/${id}`);
-  }
 }
 
 

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.neltyler.capstone202223.exception.ResourceNotFoundException;
+import com.neltyler.capstone202223.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -121,9 +123,19 @@ public class AuthController {
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found Tutorial with id = " + id));
+                .orElseThrow(() -> new RuntimeException("Not found User with id = " + id));
 
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updatePassword(@PathVariable("id") long id, @RequestBody User userRequest) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not found User with id = " + id));
+
+        user.setPassword(encoder.encode(userRequest.getPassword()));
+
+        return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")

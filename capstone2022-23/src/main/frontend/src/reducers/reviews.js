@@ -1,24 +1,34 @@
 import {
-    CREATE_REVIEWS,
-    RETRIEVE_REVIEWS,
-    UPDATE_REVIEWS,
-    DELETE_REVIEWS,
-  } from "../actions/types";
+  CREATE_REVIEW,
+  RETRIEVE_REVIEWS,
+  UPDATE_REVIEW,
+  DELETE_REVIEW,
+} from "../actions/types";
 
-  const reviewsReducerDefaultState = [];
+const reviewsReducerDefaultState = [];
 
-  export default (state = reviewsReducerDefaultState, action) => {
+export default (state = reviewsReducerDefaultState, action) => {
+  const { type, payload } = action;
 
-    const { type, payload } = action;
-    
-    switch (type) {
-        case RETRIEVE_REVIEWS:
-            return payload;
-        case CREATE_REVIEWS:
-            return [...state, payload];
-        case DELETE_REVIEWS:
-            return state.filter(({ id }) => id !== payload.id)
-        default:
-            return state;
-    }
+  switch (type) {
+    case RETRIEVE_REVIEWS:
+      return payload;
+    case CREATE_REVIEW:
+      return [...state, payload];
+    case DELETE_REVIEW:
+      return state.filter(({ id }) => id !== payload.id);
+    case UPDATE_REVIEW:
+      return state.map((state) => {
+        if (state.id === payload.id) {
+          return {
+            ...state,
+            ...payload,
+          };
+        } else {
+          return state;
+        }
+      });
+    default:
+      return state;
+  }
 };
