@@ -37,7 +37,7 @@ const payments = [
   { name: 'Expiry date', detail: '04/2024' },
 ];
 
-export default function Review() {
+export default function PaymentReview() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

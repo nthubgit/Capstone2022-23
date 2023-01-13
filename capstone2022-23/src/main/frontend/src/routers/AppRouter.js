@@ -11,6 +11,7 @@ import RegisterPage from '../components/RegisterPage';
 import NotFoundPage from '../components/NotFoundPage';
 import ShopPage from '../components/ShopPage';
 import ProductPage from '../components/ProductPage';
+import AddReview from '../components/AddReview';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -23,9 +24,10 @@ const AppRouter = () => (
         <Route path="/register" component={RegisterPage}/>
         <Route path="/login" component={LoginPage}/>
         <Route path="/logout" component={LogoutPage}/>
-        <Route path="/shop" component={ShopPage} exact={true}/>
+        <Route path="/shop" component={ShopPage}/>
         <Route path="/product" component={ProductPage}/>
         <Route path="/cart" component={CartPage}/>
+        <Route path="/addreview" component={AddReview}/>
         <Route component={NotFoundPage}/>
         </Switch>
     </div>

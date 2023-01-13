@@ -1,5 +1,5 @@
 import {
-    CREATE_REVIEWS,
+    CREATE_REVIEW,
     RETRIEVE_REVIEWS,
     UPDATE_REVIEWS,
     DELETE_REVIEWS,
@@ -17,5 +17,20 @@ import {
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  export const createReview = (id, data) => async (dispatch) => {
+    try {
+      const res = await reviewService.create(id, data);
+  
+      dispatch({
+        type: CREATE_REVIEW,
+        payload: res.data,
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
     }
   };

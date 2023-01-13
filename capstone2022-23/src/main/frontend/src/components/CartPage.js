@@ -141,7 +141,7 @@ class CartPage extends Component {
               </Table>
             </TableContainer>
             <Container align="center">
-            <CheckoutModal />
+            <CheckoutModal {...currentUser} {...carts} />
             
             <ShareLink link='http://localhost:3000/' text="I just spent on products!">
             {link => (

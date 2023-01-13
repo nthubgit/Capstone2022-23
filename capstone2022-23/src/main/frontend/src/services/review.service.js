@@ -4,8 +4,8 @@ class ReviewService {
   getAllByProduct(id) {
     return http.get(`/reviews/item/${id}`);
   }
-  create(data) {
-    return http.post("/reviews", data);
+  create(id, data) {
+    return http.post(`/users/${id}/reviews`, data);
   }
 
   update(id, data) {

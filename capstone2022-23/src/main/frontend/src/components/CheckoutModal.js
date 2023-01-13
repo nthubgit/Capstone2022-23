@@ -15,7 +15,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
-import Review from "./Review";
+import PaymentReview from "./PaymentReview";
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
@@ -26,7 +26,7 @@ function getStepContent(step) {
     case 1:
       return <PaymentForm />;
     case 2:
-      return <Review />;
+      return <PaymentReview />;
     default:
       throw new Error("Unknown step");
   }
@@ -46,7 +46,7 @@ const style = {
   p: 4,
 };
 
-export default function CheckoutModal() {
+export default function CheckoutModal({...carts}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

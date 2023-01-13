@@ -31,6 +31,7 @@ import { retrieveSingleProduct } from "../actions/products";
 import { retrieveReviewsOfProduct } from "../actions/reviews";
 
 import { PRODUCTS_ERROR } from "../actions/types";
+import AddReview from "./AddReview";
 
 
 
@@ -72,8 +73,7 @@ class ProductPage extends Component {
     const { user: currentUser } = this.props;
     const imageProp = this.props.products.images;
     const theme = createTheme();
-    console.log("render");
-    console.log({ products });
+    const params = this.getQueryVariable("item");
     const images = [
       // imageProp[4],
       // imageProp[0],
@@ -186,19 +186,32 @@ class ProductPage extends Component {
             <Typography
               component="h1"
               variant="h4"
-              align="left"
+              align="center"
               color="text.primary"
               gutterBottom
               style={{ marginTop: 16 }}
             >
               Reviews
             </Typography>
-            <ReviewModal {...currentUser} product={products.id}/>
           </Grid>
           {reviews.map((review) => {
             return <ReviewListItem key={review.id} {...review} />;
           })}
             </Grid>
+            {/* Add a Review Form*/}
+            <br />
+            <Divider />
+            <Typography
+            component="h1"
+            variant="h4"
+            align="center"
+            color="text.primary"
+            gutterBottom
+            style={{ marginTop: 16 }}
+          >
+            Write a Review
+          </Typography>
+            <AddReview />
           </Container>
         </Box>
       </ThemeProvider>
