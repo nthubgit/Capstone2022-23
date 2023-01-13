@@ -12,22 +12,22 @@ import static java.time.Month.*;
 @Configuration
 public class ReviewConfig {
 
-    @Bean
-    CommandLineRunner commandLineRunner(ReviewRepository reviewRepository) {
-        return args -> {
-            Review review1 = new Review(
-                    1L,
-                    "admin",
-                    "cool review text goes here",
-                    LocalDate.of(2023, JANUARY, 5),
-                    3.5,
-                    9
-
-            );
-
-            reviewRepository.saveAll(
-                    List.of(review1)
-            );
-        };
-    };
+//    @Bean
+//    CommandLineRunner commandLineRunner(ReviewRepository reviewRepository) {
+//        return args -> {
+//            Review review1 = new Review(
+//                    1L,
+//                    "admin",
+//                    "cool review text goes here",
+//                    LocalDate.of(2023, JANUARY, 5),
+//                    3.5,
+//                    9
+//
+//            );
+//
+//            reviewRepository.saveAll(
+//                    List.of(review1)
+//            );
+//        };
+//    };
 };

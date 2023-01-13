@@ -7,9 +7,9 @@ import {
 
   import reviewService from "../services/review.service";
 
-  export const retrieveReviews = () => async (dispatch) => {
+  export const retrieveReviewsOfProduct = (product) => async (dispatch) => {
     try {
-      const res = await reviewService.getAll();
+      const res = await reviewService.getAllByProduct(product);
   
       dispatch({
         type: RETRIEVE_REVIEWS,

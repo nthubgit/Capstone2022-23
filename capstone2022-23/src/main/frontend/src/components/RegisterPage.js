@@ -154,7 +154,6 @@ class RegisterPage extends Component {
                 this.form = c;
               }}
             >
-            {!this.state.successful && (
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <Input

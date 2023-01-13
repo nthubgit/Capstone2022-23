@@ -44,6 +44,7 @@
     "react-router-dom": "^5.0.0",
     "react-share": "^4.4.1",
     "react-test-renderer": "16.0.0",
+    "react-twitter-share-link": "^1.2.1",
     "react-validation": "^3.0.7",
     "reactstrap": "^9.1.5",
     "redux-action-constants": "^1.0.1",

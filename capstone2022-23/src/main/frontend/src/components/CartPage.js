@@ -31,27 +31,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckoutModal from "./CheckoutModal";
 
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  HatenaShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
-  PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
-  TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  WorkplaceShareButton
-} from "react-share";
+import ShareLink from 'react-twitter-share-link';
 
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
@@ -162,10 +142,11 @@ class CartPage extends Component {
             <Container align="center">
             <CheckoutModal />
             
-                      <FacebookShareButton 
-                      quote= "ok"
-                      hastag= "#dog"/>
-                      <TwitterShareButton />
+            <ShareLink link='http://localhost:3000/' text="I just spent on products!">
+            {link => (
+           <a href={link} target='_blank'>Share your expenses on Twitter!</a>
+            )}
+            </ShareLink>
                       
         
             </Container>

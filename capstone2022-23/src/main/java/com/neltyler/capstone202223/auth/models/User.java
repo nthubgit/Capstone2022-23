@@ -21,7 +21,6 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = false)
     private String username;
 
     @NotBlank

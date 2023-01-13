@@ -1,5 +1,9 @@
 package com.neltyler.capstone202223.review;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.neltyler.capstone202223.auth.models.User;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,31 +23,25 @@ public class Review {
             generator = "review_sequence"
     )
     private long id;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user.username")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
+
     private String username;
     private String reviewText;
     private LocalDate createdAt;
     private Double rating;
-
     private Integer itemId;
-
-
 
     public Review() {
     }
 
-    public Review(long id, String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
+    public Review(long id, User user, String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
         this.id = id;
         this.username = username;
-        this.reviewText = reviewText;
-        this.createdAt = createdAt;
-        this.rating = rating;
-        this.itemId = itemId;
-    }
-
-    public Review(String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
-        this.username = username;
+        this.user = user;
         this.reviewText = reviewText;
         this.createdAt = createdAt;
         this.rating = rating;
@@ -58,12 +56,12 @@ public class Review {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getReviewText() {
@@ -98,11 +96,20 @@ public class Review {
         this.itemId = itemId;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", user=" + user +
+                ", username=" + username +
                 ", reviewText='" + reviewText + '\'' +
                 ", createdAt=" + createdAt +
                 ", rating=" + rating +

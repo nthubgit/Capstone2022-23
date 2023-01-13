@@ -1,8 +1,8 @@
 import http from "../http-common";
 
 class ReviewService {
-  getAll() {
-    return http.get("/reviews");
+  getAllByProduct(id) {
+    return http.get(`/reviews/item/${id}`);
   }
   create(data) {
     return http.post("/reviews", data);

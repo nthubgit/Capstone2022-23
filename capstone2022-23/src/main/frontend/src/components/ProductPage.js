@@ -26,7 +26,7 @@ import { styled } from "@mui/material/styles";
 import ReviewListItem from "./ReviewListItems";
 
 import { retrieveSingleProduct } from "../actions/products";
-import { retrieveReviews } from "../actions/reviews";
+import { retrieveReviewsOfProduct } from "../actions/reviews";
 
 import { PRODUCTS_ERROR } from "../actions/types";
 
@@ -56,11 +56,12 @@ class ProductPage extends Component {
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
-    const getId = currentUser.id;
+    const getUserId = currentUser.id;
+
     const params = this.getQueryVariable("item");
 
     this.props.retrieveSingleProduct(params);
-    this.props.retrieveReviews(getId);
+    this.props.retrieveReviewsOfProduct(params);
   }
 
   render() {
@@ -210,4 +211,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {retrieveReviews, retrieveSingleProduct })(ProductPage);
+export default connect(mapStateToProps, {retrieveReviewsOfProduct, retrieveSingleProduct })(ProductPage);
