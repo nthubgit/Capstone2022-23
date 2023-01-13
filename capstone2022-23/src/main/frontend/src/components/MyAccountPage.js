@@ -7,6 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import AdminOptions from "./AdminOptions";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -75,6 +76,7 @@ class MyAccountPage extends Component {
 
     const { user: currentUser } = this.props;
     const { message } = this.props;
+    const showAdminCheck = currentUser.roles.includes("ROLE_ADMIN");
 
     if (!currentUser) {
       return <Redirect to="/login" />;
@@ -137,9 +139,11 @@ class MyAccountPage extends Component {
         >
           Submit
         </Button>
+        
         </div>
         </div>
       </div>
+      {showAdminCheck && <AdminOptions />}
         </div>
     );
   }

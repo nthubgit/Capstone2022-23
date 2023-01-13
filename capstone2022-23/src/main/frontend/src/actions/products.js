@@ -1,6 +1,9 @@
 import {
     GET_ALL_PRODUCTS,
-    GET_ONE_PRODUCT
+    GET_ONE_PRODUCT,
+    CREATE_PRODUCT,
+    UPDATE_PRODUCT,
+    DELETE_PRODUCT
   } from "./types";
 
   import productsService from "../services/products.service";
@@ -29,3 +32,47 @@ import {
     }
   };
 
+  export const createProduct = (data) => async (dispatch) => {
+    try {
+      const res = await productsService.create(data);
+  
+      dispatch({
+        type: CREATE_PRODUCT,
+        payload: res.data,
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+
+  export const updateProduct = (id, data) => async (dispatch) => {
+    try {
+      const res = await productsService.update(id, data);
+  
+      dispatch({
+        type: UPDATE_PRODUCT,
+        payload: res.data,
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+
+  export const deleteProduct = (id) => async (dispatch) => {
+    try {
+      const res = await productsService.delete(id);
+  
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: res.data,
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
