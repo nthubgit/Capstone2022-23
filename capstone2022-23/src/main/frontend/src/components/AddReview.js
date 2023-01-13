@@ -50,13 +50,15 @@ class AddReview extends Component {
   }
 
   saveReview() {
-    const { username, reviewText } = this.state;
+    // const { username, reviewText } = this.state;
+    const { reviewText } = this.state;
     const { id } = this.props;
+    const { username } = this.props;
     const { products } = this.props;
     const date = moment().format("YYYY-MM-DD");
 
     var dataX = {
-        username: this.state.username,
+        username: username,
         reviewText: this.state.reviewText,
         rating: this.state.rating,
         createdAt: date,
