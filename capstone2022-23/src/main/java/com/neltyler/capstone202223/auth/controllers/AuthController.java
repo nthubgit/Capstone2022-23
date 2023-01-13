@@ -12,6 +12,7 @@ import com.neltyler.capstone202223.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,7 +32,7 @@ import com.neltyler.capstone202223.auth.security.services.jwt.JwtUtils;
 import com.neltyler.capstone202223.auth.security.services.UserDetailsImpl;
 import com.neltyler.capstone202223.auth.payload.request.LoginRequest;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -50,6 +51,7 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -70,7 +72,7 @@ public class AuthController {
                 userDetails.getEmail(),
                 roles));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -119,7 +121,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully! Please redirect yourself to the Login page."));
     }
-
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") long id) {
         User user = userRepository.findById(id)
@@ -127,8 +129,9 @@ public class AuthController {
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
-    @PutMapping("/users/{id}")
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+    @PutMapping("/users/{id}/")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<User> updatePassword(@PathVariable("id") long id, @RequestBody User userRequest) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Not found User with id = " + id));
@@ -137,7 +140,7 @@ public class AuthController {
 
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         userRepository.deleteById(id);

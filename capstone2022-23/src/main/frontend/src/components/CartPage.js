@@ -54,15 +54,16 @@ class CartPage extends Component {
   }
 
   render() {
+          /*Auth*/
+          const { user: currentUser } = this.props;
+          if (!currentUser) {
+            return <Redirect to="/login" />;
+          }
     const { carts } = this.props.carts;
     const { carts: discountedTotal } = this.props;
     console.log(discountedTotal.discountedTotal);
     // console.log(carts);
-      /*Auth*/
-      const { user: currentUser } = this.props;
-      if (!currentUser) {
-        return <Redirect to="/login" />;
-      }
+
 
       const theme = createTheme();
 

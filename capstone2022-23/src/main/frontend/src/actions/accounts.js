@@ -35,3 +35,31 @@ import {
       return Promise.reject(err);
     }
   };
+
+  export const updateAccount = (id, password) => async (dispatch) => {
+    try {
+      const res = await accountService.create({ id, password });
+  
+      dispatch({
+        type: CREATE_ACCOUNT,
+        payload: res.data
+      });
+  
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+
+  export const deleteAccount = (id) => async (dispatch) => {
+    try {
+      await accountService.delete(id);
+  
+      dispatch({
+        type: DELETE_ACCOUNT,
+        payload: { id },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };

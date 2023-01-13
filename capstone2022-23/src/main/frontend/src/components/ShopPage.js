@@ -43,7 +43,11 @@ class ShopPage extends Component {
 
   render() {
 
-    
+        /*Auth*/
+        const { user: currentUser } = this.props;
+        if (!currentUser) {
+          return <Redirect to="/login" />;
+        }
     const { products } = this.props;
     console.log(this.props.products);
     const theme = createTheme();

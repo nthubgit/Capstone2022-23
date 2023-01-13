@@ -6,6 +6,7 @@ import com.neltyler.capstone202223.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class ReviewController {
     @Autowired
     private ReviewRepository ReviewRepository;
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/users/{userId}/reviews")
     public ResponseEntity<List<Review>> getAllReviewsByUserId(@PathVariable(value = "userId") Long userId) {
         if (!UserRepository.existsById(userId)) {
@@ -37,12 +39,14 @@ public class ReviewController {
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reviews/item/{itemId}")
     public ResponseEntity<List<Review>> getReviewsByItemId(@PathVariable(value = "itemId") Integer itemId) {
 
         List<Review> reviews = ReviewRepository.findByItemId(itemId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reviews/{id}")
     public ResponseEntity<Review> getReviewsByUserId(@PathVariable(value = "id") Long id) {
         Review review = ReviewRepository.findById(id)
@@ -53,6 +57,7 @@ public class ReviewController {
 
 
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping("/users/{userId}/reviews")
     public ResponseEntity<Review> createReview(@PathVariable(value = "userId") Long userId,
                                                  @RequestBody Review reviewRequest) {
@@ -64,6 +69,7 @@ public class ReviewController {
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PutMapping("/reviews/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable("id") long id, @RequestBody Review reviewRequest) {
         Review review = ReviewRepository.findById(id)
@@ -74,14 +80,14 @@ public class ReviewController {
 
         return new ResponseEntity<>(ReviewRepository.save(review), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @DeleteMapping("/reviews/{id}")
     public ResponseEntity<HttpStatus> deleteReview(@PathVariable("id") long id) {
         ReviewRepository.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @DeleteMapping("/users/{userId}/reviews")
     public ResponseEntity<List<Review>> deleteAllReviewsOfUser(@PathVariable(value = "userId") Long userId) {
         if (!UserRepository.existsById(userId)) {

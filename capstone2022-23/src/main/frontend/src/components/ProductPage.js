@@ -95,9 +95,12 @@ class ProductPage extends Component {
   }
 
   render() {
+    const { user: currentUser } = this.props;
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
     const { products } = this.props;
     const { reviews } = this.props;
-    const { user: currentUser } = this.props;
     const imageProp = this.props.products.images;
     const theme = createTheme();
     const params = this.getQueryVariable("item");
