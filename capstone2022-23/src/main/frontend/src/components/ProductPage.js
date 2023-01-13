@@ -21,7 +21,7 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Rating from "@mui/material/Rating";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 import { styled } from "@mui/material/styles";
 
 import ReviewListItem from "./ReviewListItems";
@@ -32,13 +32,23 @@ import { retrieveReviewsOfProduct } from "../actions/reviews";
 
 import { PRODUCTS_ERROR } from "../actions/types";
 import AddReview from "./AddReview";
-
-
-
+import EditReview from "./EditReview";
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
+
+    this.onChangeAddReviewVisibility =
+      this.onChangeAddReviewVisibility.bind(this);
+    this.onChangeEditReviewVisibility =
+      this.onChangeEditReviewVisibility.bind(this);
+
+    this.state = {
+      addReviewFormShown: false,
+      addReviewButtonShown: true,
+      editReviewShown: false,
+      selectedReview: "",
+    };
   }
   //used to get the query variable from the URL which will be used as the ID for the GET
   getQueryVariable = (variable) => {
@@ -67,6 +77,23 @@ class ProductPage extends Component {
     this.props.retrieveReviewsOfProduct(params);
   }
 
+  onChangeAddReviewVisibility(e) {
+    this.setState({
+      addReviewShown: true,
+      addReviewButtonShown: false,
+      editReviewShown: false,
+    });
+  }
+
+  onChangeEditReviewVisibility(id) {
+    this.setState({
+      addReviewShown: false,
+      addReviewButtonShown: true,
+      editReviewShown: true,
+      selectedReview: id
+    });
+  }
+
   render() {
     const { products } = this.props;
     const { reviews } = this.props;
@@ -74,13 +101,7 @@ class ProductPage extends Component {
     const imageProp = this.props.products.images;
     const theme = createTheme();
     const params = this.getQueryVariable("item");
-    const images = [
-      // imageProp[4],
-      // imageProp[0],
-      // imageProp[1],
-      // imageProp[2],
-      // imageProp[3],
-    ];
+
     const Item = styled(Paper)(({ theme }) => ({
       backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
       ...theme.typography.body2,
@@ -152,8 +173,8 @@ class ProductPage extends Component {
               {/* Price*/}
               <Grid item xs={4}>
                 <Item>
-                Price:
-                <br />
+                  Price:
+                  <br />
                   <s>${products.price}</s>
                   <br />
                   {products.discountPercentage}% OFF!
@@ -162,8 +183,8 @@ class ProductPage extends Component {
               {/* Rating*/}
               <Grid item xs={4}>
                 <Item>
-                Rating:
-                <br />
+                  Rating:
+                  <br />
                   <Rating
                     name="read-only"
                     defaultValue={products.rating}
@@ -174,44 +195,86 @@ class ProductPage extends Component {
               </Grid>
               {/* QTY*/}
               <Grid item xs={4}>
-                <Item>Stock:
-                <br /> {products.stock}</Item>
+                <Item>
+                  Stock:
+                  <br /> {products.stock}
+                </Item>
               </Grid>
             </Grid>
             <br />
             <Divider />
-              {/* Reviews*/}
+            {/* Reviews*/}
             <Grid container spacing={4}>
-            <Grid item xs={12}>
-            <Typography
-              component="h1"
-              variant="h4"
-              align="center"
-              color="text.primary"
-              gutterBottom
-              style={{ marginTop: 16 }}
-            >
-              Reviews
-            </Typography>
-          </Grid>
-          {reviews.map((review) => {
-            return <ReviewListItem key={review.id} {...review} />;
-          })}
+              <Grid item xs={12}>
+                <Typography
+                  component="h1"
+                  variant="h4"
+                  align="center"
+                  color="text.primary"
+                  gutterBottom
+                  style={{ marginTop: 16 }}
+                >
+                  Reviews
+                </Typography>
+              </Grid>
+              {reviews.map((review) => {
+                return (
+                  <ReviewListItem
+                    testFunction={this.onChangeEditReviewVisibility}
+                    key={review.id}
+                    {...review}
+                  />
+                );
+              })}
             </Grid>
-            {/* Add a Review Form*/}
-            <br />
-            <Divider />
-            <Typography
-            component="h1"
-            variant="h4"
-            align="center"
-            color="text.primary"
-            gutterBottom
-            style={{ marginTop: 16 }}
-          >
-            Write a Review
-          </Typography>
-            <AddReview />
+            {/* Add a Review Button: toggles the form. is shown when the form is hidden, and vice versa*/}
+            {this.state.addReviewButtonShown && (
+              <Box sx={{m: 2}}align="center">
+              <Button
+                variant="contained"
+                size = "large"
+                onClick={this.onChangeAddReviewVisibility}
+              >
+                Write a Review
+              </Button>
+              </Box>
+            )}
+            {/* Show Add Review Form if conditions are met*/}
+            {this.state.addReviewShown && (
+              <div>
+                <br />
+                <Divider />
+                <Typography
+                  component="h1"
+                  variant="h4"
+                  align="center"
+                  color="text.primary"
+                  gutterBottom
+                  style={{ marginTop: 16 }}
+                >
+                  Write a Review
+                </Typography>
+                <AddReview />
+              </div>
+            )}
+            {/* Show Edit Review Form if conditions are met*/}
+            {this.state.editReviewShown && (
+              <div>
+                <br />
+                <Divider />
+                <Typography
+                  component="h1"
+                  variant="h4"
+                  align="center"
+                  color="text.primary"
+                  gutterBottom
+                  style={{ marginTop: 16 }}
+                >
+                  Edit a Review
+                </Typography>
+                <EditReview id={this.state.selectedReview}/>
+              </div>
+            )}
           </Container>
         </Box>
       </ThemeProvider>
@@ -226,8 +289,11 @@ function mapStateToProps(state) {
   return {
     products: state.products,
     user,
-    reviews: state.reviews
+    reviews: state.reviews,
   };
 }
 
-export default connect(mapStateToProps, {retrieveReviewsOfProduct, retrieveSingleProduct })(ProductPage);
+export default connect(mapStateToProps, {
+  retrieveReviewsOfProduct,
+  retrieveSingleProduct,
+})(ProductPage);

@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import moment from "moment";
 import Container from "@mui/material/Container";
 import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { connect } from "react-redux";
-import { createReview } from "../actions/reviews";
+import { updateReview } from "../actions/reviews";
+import { deleteReview } from "../actions/reviews";
 import { TextField } from "@mui/material";
 
-class AddReview extends Component {
+class EditReview extends Component {
   constructor(props) {
     super(props);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeReviewText = this.onChangeReviewText.bind(this);
     this.onChangeRating = this.onChangeRating.bind(this);
     this.saveReview = this.saveReview.bind(this);
+    this.removeReview = this.removeReview.bind(this);
 
     this.state = {
       id: null,
@@ -47,26 +50,40 @@ class AddReview extends Component {
   saveReview() {
     // const { username, reviewText } = this.state;
     const { reviewText } = this.state;
-    const { id } = this.props;
     const { username } = this.props;
-    const { products } = this.props;
     const date = moment().format("YYYY-MM-DD");
+    const id = this.props.id;
 
     var dataX = {
+  
       username: username,
       reviewText: this.state.reviewText,
       rating: this.state.rating,
       createdAt: date,
-      itemId: products.id,
     };
 
     this.props
-      .createReview(id, dataX)
+      .updateReview(id, dataX)
       .then(() => {
         this.setState({
           submitted: true,
         });
-        window.location.reload();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  removeReview() {
+    const id = this.props.id;
+
+    this.props
+      .deleteReview(id)
+      .then(() => {
+        this.setState({
+          submitted: true,
+        });
+        
       })
       .catch((e) => {
         console.log(e);
@@ -74,27 +91,10 @@ class AddReview extends Component {
   }
 
   render() {
-    const { username, products } = this.props;
-    console.log(products.id);
+    const { username, products, reviews } = this.props;
     return (
       <div className="submit-form">
         <div>
-          <div className="form-group">
-            <TextField
-              required
-              id="username"
-              name="username"
-              label="Username"
-              fullWidth
-              autoComplete="given-name"
-              variant="standard"
-              value={username}
-              onChange={this.onChangeUsername}
-              required
-              disabled
-            />
-          </div>
-
           <TextField
             required
             id="reviewText"
@@ -118,15 +118,23 @@ class AddReview extends Component {
               onChange={this.onChangeRating}
             />
           </Container>
-          <Container align="center">
-          <Button
-          variant="contained"
-          size = "large"
-          onClick={this.saveReview}
-        >
-          Submit
-        </Button>
-          </Container>
+            <Box sx={{m: 2}}align="center">
+            <Button
+              variant="contained"
+              size = "large"
+              onClick={this.saveReview}
+            >
+              Submit
+            </Button>
+            <Button
+            variant="contained"
+            size = "large"
+            color = "error"
+            onClick={this.removeReview}
+          >
+            Delete
+          </Button>
+            </Box>
         </div>
       </div>
     );
@@ -134,14 +142,12 @@ class AddReview extends Component {
 }
 
 function mapStateToProps(state) {
-  const { id } = state.auth.user;
   const { username } = state.auth.user;
   const { products } = state;
   return {
-    id,
     username,
     products,
   };
 }
 
-export default connect(mapStateToProps, { createReview })(AddReview);
+export default connect(mapStateToProps, { updateReview, deleteReview })(EditReview);
