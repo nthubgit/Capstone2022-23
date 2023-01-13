@@ -107,7 +107,7 @@ class AdminOptions extends Component {
     return (
         <div>
         <Divider />
-        <strong>Admin Options</strong>
+        <strong><h4>Admin Options</h4></strong>
         <h5>Test Product API (DummyJSON)</h5>
           <Box>
           <Button

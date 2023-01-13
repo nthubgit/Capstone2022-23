@@ -106,7 +106,7 @@ class MyAccountPage extends Component {
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
         </ul>
         <Divider />
-        <strong>Options</strong>
+        <strong><h4>Options</h4></strong>
         <h5>Change password</h5>
         <div className="submit-form">
         <div>
