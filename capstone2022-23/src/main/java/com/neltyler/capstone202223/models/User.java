@@ -1,5 +1,7 @@
 package com.neltyler.capstone202223.auth.models;
 
+import com.neltyler.capstone202223.review.Review;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,10 +40,22 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private Set<Review> reviews = new HashSet<>();
+
     public User() {
+
     }
 
     public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Long id, String username, String email, String password) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -85,5 +99,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 }

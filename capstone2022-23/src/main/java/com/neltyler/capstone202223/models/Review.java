@@ -23,12 +23,6 @@ public class Review {
             generator = "review_sequence"
     )
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private User user;
-
     private String username;
     private String reviewText;
     private LocalDate createdAt;
@@ -38,10 +32,9 @@ public class Review {
     public Review() {
     }
 
-    public Review(long id, User user, String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
+    public Review(long id, String username, String reviewText, LocalDate createdAt, Double rating, Integer itemId) {
         this.id = id;
         this.username = username;
-        this.user = user;
         this.reviewText = reviewText;
         this.createdAt = createdAt;
         this.rating = rating;
@@ -54,14 +47,6 @@ public class Review {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getReviewText() {
@@ -108,7 +93,6 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", user=" + user +
                 ", username=" + username +
                 ", reviewText='" + reviewText + '\'' +
                 ", createdAt=" + createdAt +

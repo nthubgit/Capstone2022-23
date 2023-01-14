@@ -1,6 +1,9 @@
 package com.neltyler.capstone202223.review;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.neltyler.capstone202223.auth.models.User;
 import com.neltyler.capstone202223.auth.repository.UserRepository;
 import com.neltyler.capstone202223.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +31,29 @@ public class ReviewController {
     @Autowired
     private ReviewRepository ReviewRepository;
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/users/{userId}/reviews")
     public ResponseEntity<List<Review>> getAllReviewsByUserId(@PathVariable(value = "userId") Long userId) {
-        if (!UserRepository.existsById(userId)) {
-            throw new ResourceNotFoundException("Not found User with id = " + userId);
-        }
+        User user = UserRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Not found User with id = " + userId));;
+//        if (!UserRepository.existsById(userId)) {
+//            throw new ResourceNotFoundException("Not found User with id = " + userId);
+//        }
 
-        List<Review> reviews = ReviewRepository.findByUserId(userId);
+        List<Review> reviews = new ArrayList<Review>();
+        reviews.addAll(user.getReviews());
+
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reviews/item/{itemId}")
     public ResponseEntity<List<Review>> getReviewsByItemId(@PathVariable(value = "itemId") Integer itemId) {
 
         List<Review> reviews = ReviewRepository.findByItemId(itemId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
+
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reviews/{id}")
     public ResponseEntity<Review> getReviewsByUserId(@PathVariable(value = "id") Long id) {
@@ -62,7 +70,7 @@ public class ReviewController {
     public ResponseEntity<Review> createReview(@PathVariable(value = "userId") Long userId,
                                                  @RequestBody Review reviewRequest) {
         Review review = UserRepository.findById(userId).map(user -> {
-            reviewRequest.setUser(user);
+            user.getReviews().add(reviewRequest);
             return ReviewRepository.save(reviewRequest);
         }).orElseThrow(() -> new ResourceNotFoundException("Not found User with id = " + userId));
 
@@ -87,14 +95,14 @@ public class ReviewController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    @DeleteMapping("/users/{userId}/reviews")
-    public ResponseEntity<List<Review>> deleteAllReviewsOfUser(@PathVariable(value = "userId") Long userId) {
-        if (!UserRepository.existsById(userId)) {
-            throw new ResourceNotFoundException("Not found User with id = " + userId);
-        }
-
-        ReviewRepository.deleteByUserId(userId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @DeleteMapping("/users/{userId}/reviews")
+//    public ResponseEntity<List<Review>> deleteAllReviewsOfUser(@PathVariable(value = "userId") Long userId) {
+//        if (!UserRepository.existsById(userId)) {
+//            throw new ResourceNotFoundException("Not found User with id = " + userId);
+//        }
+//
+//        ReviewRepository.deleteByUserId(userId);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 }

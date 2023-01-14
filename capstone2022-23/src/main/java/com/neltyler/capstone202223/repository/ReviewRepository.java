@@ -10,11 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+    List<Review> findByItemId(Integer itemId);
 
-    List<Review> findByUserId(Long postId);
-
-    @Transactional
-    void deleteByUserId(long userId);
-
-   List<Review> findByItemId(Integer itemId);
+//    List<Review> findByUserId(Long postId);
+//
+//   List<Review> findByItemId(Integer itemId);
 }
