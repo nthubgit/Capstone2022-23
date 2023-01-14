@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.auth.controllers;
+package com.neltyler.capstone202223.controllers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,12 +7,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.neltyler.capstone202223.exception.ResourceNotFoundException;
-import com.neltyler.capstone202223.review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,21 +17,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.neltyler.capstone202223.auth.models.ERole;
-import com.neltyler.capstone202223.auth.models.Role;
-import com.neltyler.capstone202223.auth.models.User;
-import com.neltyler.capstone202223.auth.payload.request.SignupRequest;
-import com.neltyler.capstone202223.auth.payload.response.JwtResponse;
-import com.neltyler.capstone202223.auth.payload.response.MessageResponse;
-import com.neltyler.capstone202223.auth.repository.RoleRepository;
-import com.neltyler.capstone202223.auth.repository.UserRepository;
+import com.neltyler.capstone202223.models.ERole;
+import com.neltyler.capstone202223.models.Role;
+import com.neltyler.capstone202223.models.User;
+import com.neltyler.capstone202223.payload.request.SignupRequest;
+import com.neltyler.capstone202223.payload.response.JwtResponse;
+import com.neltyler.capstone202223.payload.response.MessageResponse;
+import com.neltyler.capstone202223.repository.RoleRepository;
+import com.neltyler.capstone202223.repository.UserRepository;
 import com.neltyler.capstone202223.auth.security.services.jwt.JwtUtils;
 import com.neltyler.capstone202223.auth.security.services.UserDetailsImpl;
-import com.neltyler.capstone202223.auth.payload.request.LoginRequest;
+import com.neltyler.capstone202223.payload.request.LoginRequest;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -52,7 +49,7 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-    @PostMapping("/signin")
+    @PostMapping("/auth/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -73,7 +70,7 @@ public class AuthController {
                 roles));
     }
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity

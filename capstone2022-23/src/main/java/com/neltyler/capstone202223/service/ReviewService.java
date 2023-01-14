@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.review;
+package com.neltyler.capstone202223.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

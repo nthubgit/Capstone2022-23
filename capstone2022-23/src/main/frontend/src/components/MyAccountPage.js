@@ -40,11 +40,15 @@ class MyAccountPage extends Component {
 
   handleUpdateAccount() {
     const { user: currentUser } = this.props;
-    const id = currentUser.id
+    const id = currentUser.id;
     const password = this.state.password;
 
+    const data = {
+      password: this.state.password
+    }
+
     this.props
-      .updateAccount(id, password)
+      .updateAccount(id, data)
       .then(() => {
         this.setState({
           submitted: true,

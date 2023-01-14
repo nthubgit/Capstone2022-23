@@ -66,8 +66,10 @@ class EditReview extends Component {
       .updateReview(id, dataX)
       .then(() => {
         this.setState({
-          submitted: true,
+          submitted: !this.state.submitted,
+          
         });
+        console.log(this.state.submitted);
       })
       .catch((e) => {
         console.log(e);
@@ -81,7 +83,7 @@ class EditReview extends Component {
       .deleteReview(id)
       .then(() => {
         this.setState({
-          submitted: true,
+          submitted: !this.state.submitted,
         });
         
       })

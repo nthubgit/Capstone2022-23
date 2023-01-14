@@ -1,11 +1,7 @@
-package com.neltyler.capstone202223.review;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.neltyler.capstone202223.auth.models.User;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+package com.neltyler.capstone202223.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
@@ -23,7 +19,9 @@ public class Review {
             generator = "review_sequence"
     )
     private long id;
+    @NotNull
     private String username;
+    @NotNull
     private String reviewText;
     private LocalDate createdAt;
     private Double rating;
@@ -37,6 +35,14 @@ public class Review {
         this.username = username;
         this.reviewText = reviewText;
         this.createdAt = createdAt;
+        this.rating = rating;
+        this.itemId = itemId;
+    }
+
+    public Review(long id, String username, String reviewText, Double rating, Integer itemId) {
+        this.id = id;
+        this.username = username;
+        this.reviewText = reviewText;
         this.rating = rating;
         this.itemId = itemId;
     }

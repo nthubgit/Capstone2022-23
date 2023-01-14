@@ -1,6 +1,4 @@
-package com.neltyler.capstone202223.auth.models;
-
-import com.neltyler.capstone202223.review.Review;
+package com.neltyler.capstone202223.models;
 
 import java.util.HashSet;
 import java.util.Set;

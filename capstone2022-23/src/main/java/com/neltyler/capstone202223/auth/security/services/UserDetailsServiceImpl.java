@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.neltyler.capstone202223.auth.models.User;
-import com.neltyler.capstone202223.auth.repository.UserRepository;
+import com.neltyler.capstone202223.models.User;
+import com.neltyler.capstone202223.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

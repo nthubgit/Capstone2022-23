@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.auth.payload.response;
+package com.neltyler.capstone202223.payload.response;
 
 public class MessageResponse {
     private String message;

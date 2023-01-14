@@ -36,9 +36,9 @@ import {
     }
   };
 
-  export const updateAccount = (id, password) => async (dispatch) => {
+  export const updateAccount = (id, data) => async (dispatch) => {
     try {
-      const res = await accountService.create({ id, password });
+      const res = await accountService.update(id, data);
   
       dispatch({
         type: CREATE_ACCOUNT,

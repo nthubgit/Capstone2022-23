@@ -1,10 +1,11 @@
-package com.neltyler.capstone202223.review;
+package com.neltyler.capstone202223.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.neltyler.capstone202223.auth.models.User;
-import com.neltyler.capstone202223.auth.repository.UserRepository;
+import com.neltyler.capstone202223.models.Review;
+import com.neltyler.capstone202223.models.User;
+import com.neltyler.capstone202223.repository.UserRepository;
 import com.neltyler.capstone202223.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,11 +30,11 @@ public class ReviewController {
     private UserRepository UserRepository;
 
     @Autowired
-    private ReviewRepository ReviewRepository;
+    private com.neltyler.capstone202223.repository.ReviewRepository ReviewRepository;
 
 
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    @GetMapping("/users/{userId}/reviews")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/reviews/users/{userId}")
     public ResponseEntity<List<Review>> getAllReviewsByUserId(@PathVariable(value = "userId") Long userId) {
         User user = UserRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Not found User with id = " + userId));;
 //        if (!UserRepository.existsById(userId)) {
@@ -46,7 +47,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reviews/item/{itemId}")
     public ResponseEntity<List<Review>> getReviewsByItemId(@PathVariable(value = "itemId") Integer itemId) {
 

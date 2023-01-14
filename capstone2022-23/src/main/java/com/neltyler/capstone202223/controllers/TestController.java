@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.auth.controllers;
+package com.neltyler.capstone202223.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

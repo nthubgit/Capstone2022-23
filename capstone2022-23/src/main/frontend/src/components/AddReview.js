@@ -53,6 +53,7 @@ class AddReview extends Component {
     const date = moment().format("YYYY-MM-DD");
 
     var dataX = {
+      user_id: id,
       username: username,
       reviewText: this.state.reviewText,
       rating: this.state.rating,

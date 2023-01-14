@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.auth.models;
+package com.neltyler.capstone202223.models;
 
 import javax.persistence.*;
 

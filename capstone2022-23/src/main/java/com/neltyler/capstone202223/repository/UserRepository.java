@@ -1,13 +1,11 @@
-package com.neltyler.capstone202223.auth.repository;
+package com.neltyler.capstone202223.repository;
 
-import java.util.List;
 import java.util.Optional;
 
-import com.neltyler.capstone202223.review.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.neltyler.capstone202223.auth.models.User;
+import com.neltyler.capstone202223.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

@@ -1,4 +1,4 @@
-package com.neltyler.capstone202223.auth.payload.request;
+package com.neltyler.capstone202223.payload.request;
 
 import java.util.Set;
 
