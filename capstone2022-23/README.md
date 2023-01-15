@@ -2,14 +2,14 @@
 
 Name: Tyler Nelson
 
-Capstone project for Software Development course.
+## Capstone project for Software Development course.
 
 This product demonstrates a PoC e-commerce website with mock functionality.
 The purpose of the project is to enable me to get acquainted with the popular React and Spring Boot frameworks,
 allowing me to bolster my portfolio and give me an edge in the job market. In addition, it is a culmination of my studies
 where I will build a fully-functional full-stack web application.
 
-Main Features:
+### Main Features:
 
 - Login
 - Logout
@@ -25,32 +25,34 @@ Main Features:
 - Sharing on social media
 - ... and more
 
-User Interface:
+
+### User Interface:
 
 The web application uses a simple design powered by Material UI. 
 The application went through many iterations over 9 weeks, going from Bootstrap, Sass, react-strap,
 elements of which of still persist in some parts of the design.
 
-Product Schedule:
+
+### Product Schedule:
 
 With zero knowledge any of the frameworks I planned to use at the start of the project,
 a great deal of time was spent learning the basics of each through lengthy Udemy courses, tutorials,
 and mini projects before I understood enough of each to create the project I had in mind. In retrospect,
 learning just React alone would have been a more time efficient approach.
 
-Preparation Phase: 11/07/2022 ~ 12/16/2022
+#### Preparation Phase: 11/07/2022 ~ 12/16/2022
 
 Learn basics of React using "The Complete React Developer Course (w Hooks and Redux)" course
 Learn basics of Spring Boot using "The Complete Spring Boot Development Bootcamp" course
 Various other YouTube tutorials, website tutorials, and learning resources
 
-Execution Phase: 12/16/2022 ~ 1/13/2023
+#### Execution Phase: 12/16/2022 ~ 1/13/2023
 
 Pause to learn Firebase over holidays
 Switch back to Spring Boot
 Bring everything learned together while learning and integrating new techniques
 
-User Stories:
+#### User Stories:
 
 1. As a user, I want to be able to register to create an account to view the website.
 2. As a user, I want to be able to login to view the website so that I can access the content.
@@ -86,13 +88,15 @@ User Stories:
 Early layout, UML mockup: https://puu.sh/Jwzi4/5bf01c4f93.png
 
 
-Frameworks:
+
+### Frameworks:
 
 Spring Boot 2
 Spring Security
 React 14 -> 17
 
-Installation:
+
+### Installation:
 
 Download and extract.
 Run command "yarn-start-dev" from the Powershell in the root "frontend" folder to run the frontend side at http://localhost:3000.
@@ -100,7 +104,8 @@ See "package.json" for a list of dependencies.
 Run the backend side via your IDE of choice (I used IntelliJ), and it will run at http://localhost:8080.
 PostgreSQL is used for the database. Import "capstoneDB_2023_01_13.json" for some sample data, or start anew.
 
-API: 
+
+### API: 
 
 This project uses both the API from Spring Boot, and an external API known as DummyJSON for dummy product and cart data.
 For DummyJSON API calls, refer to https://dummyjson.com/docs/products.
@@ -138,7 +143,8 @@ Updates the password of a user at the given id. Takes password param.
 DELETE /api/users/{id}
 Deletes the user at the given id.
 
-Known Bugs:
+
+### Known Bugs:
 
 - Upon building the front end, dependency-related warnings will show in Powershell, but this does not hinder operation.
 - Warnings regarding forwardRef or render updating will occasionally display, but they do not hinder operation.
@@ -146,7 +152,8 @@ Known Bugs:
 - Attempting to access a non-authorized page while logged out may not result in a successful redirect to /login due to some lifecycle processes.
 
 
-Roadmap:
+
+### Roadmap:
 
 - Fix up design, perhaps use a paid template.
 - Consolidate design to only use MUI components wherever possible.
