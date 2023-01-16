@@ -139,10 +139,8 @@ class AdminOptions extends Component {
 
 function mapStateToProps(state) {
   const { user } = state.auth;
-  const { message } = state.message;
   return {
-    user,
-    message,
+    user
   };
 }
 

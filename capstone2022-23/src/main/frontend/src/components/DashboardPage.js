@@ -88,7 +88,7 @@ class DashboardPage extends Component {
               title={products.title}
               description={products.description}
               price={products.price}
-              rating={products.rating?products.products.rating :""}
+              rating={products.rating?products.rating :""}
               thumbnail={products.thumbnail}
               />
 

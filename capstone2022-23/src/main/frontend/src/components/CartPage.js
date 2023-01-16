@@ -33,7 +33,6 @@ import CheckoutModal from "./CheckoutModal";
 import Divider from '@mui/material/Divider';
 
 import ShareLink from 'react-twitter-share-link';
-import { FacebookShareButton, FacebookIcon } from "react-share";
 
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
@@ -144,10 +143,7 @@ class CartPage extends Component {
             </TableContainer>
             <Container align="center">
             <CheckoutModal {...currentUser} {...carts} />
-            <FacebookShareButton url={item.link}>
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
-            <ShareLink link='http://localhost:3000/' text="I just spent on products!">
+            <ShareLink link='http://localhost:3000/' text="I just bought something at this site, and you should too!">
             {link => (
            <a href={link} target='_blank'>Enjoying your shopping? Share your experience on Twitter!</a>
             )}

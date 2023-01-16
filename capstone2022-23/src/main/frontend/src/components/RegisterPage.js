@@ -22,6 +22,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
 
+import { history } from '../helpers/history';
+
 const theme = createTheme();
 
 const required = (value) => {
@@ -79,6 +81,10 @@ class RegisterPage extends Component {
       successful: false,
       message: "",
     };
+
+    history.listen((location) => {
+      props.dispatch(clearMessage()); 
+    });
   }
 
   onChangeUsername(e) {
